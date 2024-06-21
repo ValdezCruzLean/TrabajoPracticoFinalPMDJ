@@ -2,11 +2,13 @@ private Tanque miTanque;
 private SpawnerBalas spawner;
 private SpawnerAlien spawnerAlien;
 private float timer;
+private Boss boss;
+
 
 
 public void setup() {
 fullScreen ();
-
+boss = new Boss (new PVector (width/2,-100));
 spawnerAlien = new SpawnerAlien();//Inicializacion del generador de lapices
 spawnerAlien.spawnAliens();
 timer = 0;
@@ -18,7 +20,8 @@ frameRate (60);
 public void draw(){
 
 background(0);
-
+ boss.display();
+ boss.move();
  spawnerAlien.actualizarAliens();// Actualiza la creacion de los lapices y sus metodos
  spawner.actualizarBalas();
  miTanque.display();
