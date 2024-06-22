@@ -75,6 +75,7 @@ public void keyPressed() {
    //  jugandoAudio.loop(); //Reproducimos la musica de jugandoAudio en un bucle
     }
   }
+  if (gestorJuego.getNivelJuego() == MaquinaEstados.PANTALLA_JUGANDOLEVELONE) {
     if (keyCode == ENTER) {
         // Obtener el tiempo actual en milisegundos
         float currentTime = millis();
@@ -88,8 +89,10 @@ public void keyPressed() {
             lastShootTime = currentTime;
         }
     }
+  }
 }
 void mousePressed() {
+  if (gestorJuego.getNivelJuego() == MaquinaEstados.PANTALLA_JUGANDOLEVELONE) {
     // Obtener el tiempo actual en milisegundos
     float currentTime = millis();
 
@@ -104,4 +107,5 @@ void mousePressed() {
             lastShootTime = currentTime;
         }
     }
+}
 }
