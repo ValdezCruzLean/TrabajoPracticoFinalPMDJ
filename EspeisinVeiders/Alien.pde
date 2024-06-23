@@ -7,14 +7,14 @@ class Alien extends GameObject implements IVisualizable {
     private int frameHeight = 100; // Alto de cada frame
     private int lastFrameChangeTime;
     private int frameInterval = 1000; // cambiar frame cada 1000 ms (1 segundo)
-
+    private float size;
     public Alien(PVector posicion) {
         this.posicion = posicion;
         this.velocidad = new PVector(2, height / 20); // Velocidad vertical constante
         this.spritesheet = loadImage("Enemy.png");
         this.totalFrames = 6; // número total de frames en la hoja de sprites
         this.frames = new PImage[totalFrames];
-
+        this.size = 40;
         // Extraer cada frame de la hoja de sprites
         for (int i = 0; i < totalFrames; i++) {
             frames[i] = spritesheet.get(i * frameWidth, 0, frameWidth, frameHeight);
