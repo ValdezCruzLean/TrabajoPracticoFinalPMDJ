@@ -41,7 +41,8 @@ class Tanque extends GameObject implements IVisualizable{
   
   
   public void disparar(SpawnerBalas spawner) {
-    Bala unaBala = new Bala(new PVector(this.posicion.x, this.posicion.y));
+   PVector posicionJugador = new PVector(this.posicion.x, this.posicion.y);
+    Bala unaBala = new Bala(posicionJugador, this.getVectorTanqueBoss().getDestino());
     Bala[] balas = spawner.getBalas();
     for (int i = 0; i < balas.length; i++) {
       if (balas[i] == null) {

@@ -2,6 +2,8 @@ class Boss extends GameObject implements IVisualizable{
 
    private Vector vectorBoss;
    private Vector vectorTanqueBoss;
+   private int cantVida; 
+
 //private PVector velocidad;
 private PImage imagen;
 
@@ -14,6 +16,8 @@ this.imagen = loadImage("Boss.png");
 this.imagen.resize (300,300);
 this.vectorBoss = new Vector(this.posicion, new PVector(1,0));
 this.vectorTanqueBoss = new Vector();
+this.cantVida = 50;// Asigna la cantidad de vida del jugador por defecto
+
 }
 
 
@@ -36,6 +40,9 @@ this.vectorTanqueBoss = new Vector();
 public void display() {
 imageMode (CENTER);
 image (imagen, this.posicion.x,this.posicion.y);
+ fill(255);//Color del texto
+  textSize(40);//Tamaño del texto
+  text("Boss Life:" + this.cantVida, 50, 50);//Texto que aparecera en pantalla
 }
 public void move() {
 this.posicion.y+=this.velocidad.y*Time.getDeltaTime (frameRate);

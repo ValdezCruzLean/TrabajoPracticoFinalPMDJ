@@ -8,16 +8,17 @@ private float distancia = 800;
 private ArrayList<Bomba> bombas;
 // Variable para controlar el tiempo transcurrido desde el último disparo
 float lastShootTime = 0;
-
+/**Variable para el temporizador que se ejecutara en el juego*/
+private Timmer tiempo;
 // Tiempo de cooldown entre disparos 
-private int cooldownTimeBomba = 800; //  3 segundo de cooldown
+private int cooldownTimeBomba = 2000; //  3 segundo de cooldown
 private int cooldownTimeBala = 500; // 1 segundo de cooldown
 
 
 
 public void setup() {
 //fullScreen ();
-size(500,500);
+size(800,700);
 boss = new Boss (new PVector (width/2,-100));
 spawnerAlien = new SpawnerAlien();//Inicializacion del generador de lapices
 spawnerAlien.spawnAliens();
@@ -26,6 +27,8 @@ miTanque = new Tanque();
  spawner = new SpawnerBalas(1000);
  bombas = new ArrayList<Bomba>();
  gestorJuego = new GestorJuego(); // Inicialización del objeto gestor de juego
+  tiempo = new Timmer(); // Inicialización del objeto temporizador
+
 frameRate (60);
 }
 
@@ -37,16 +40,20 @@ background(0);
   gestorJuego.setNivelJuego(MaquinaEstados.PANTALLA_INICIANDO);
    }
  if (gestorJuego.getNivelJuego() == MaquinaEstados.PANTALLA_JUGANDOLEVELONE) { 
+   if (tiempo.getTime() < 130) {//Indicamos que si el tiempo es menor a 100 se ejecutaran las siguientes sentencias 
  boss.display();
  boss.move();
+   }
  spawnerAlien.actualizarAliens();// Actualiza la creacion de los lapices y sus metodos
  spawner.actualizarBalas();
  miTanque.readCommand();
  miTanque.calcularVectorJugadorEnemigo(boss);
+ tiempo.countDown(); // Actualizar el temporizador del juegio
+
 timer+=Time.getDeltaTime(frameRate);
-fill(255);
-textSize(20);
-text("Segundos: "+round (timer),20,100);
+//fill(255);
+//textSize(20);
+//text("Segundos: "+round (timer),20,100);
 
  if (miTanque.getVectorTanqueBoss().getDestino().mag() < distancia){
     miTanque.spin();      
