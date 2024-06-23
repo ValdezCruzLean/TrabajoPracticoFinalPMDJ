@@ -3,8 +3,7 @@ class Bala extends GameObject implements IVisualizable{
     private PVector direccion;
     private float velocidad;
     private PVector velocidadPvector;
-
-
+    private float size;
  public Bala() {}
   
   public Bala(PVector posicion,PVector direccion){
@@ -12,7 +11,7 @@ class Bala extends GameObject implements IVisualizable{
     this.velocidad = 30;
     this.direccion = direccion;
     this.velocidadPvector = new PVector(0,-500);
-
+    this.size = 10;
     
   } 
   public void move(){

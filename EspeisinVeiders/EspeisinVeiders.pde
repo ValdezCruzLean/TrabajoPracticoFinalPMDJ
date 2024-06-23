@@ -16,7 +16,7 @@ public Timmer tiempo;
 private int cooldownTimeBomba = 2000; //  3 segundo de cooldown
 private int cooldownTimeBala = 500; // 1 segundo de cooldown
 
-
+CollisionDetector collision;
 
 public void setup() {
 //fullScreen ();
@@ -30,7 +30,7 @@ miTanque = new Tanque();
  bombas = new ArrayList<Bomba>();
  gestorJuego = new GestorJuego(); // Inicialización del objeto gestor de juego
   tiempo = new Timmer(); // Inicialización del objeto temporizador
-
+collision = new CollisionDetector(spawner, spawnerAlien);
 frameRate (60);
 }
 
@@ -67,6 +67,7 @@ timer+=Time.getDeltaTime(frameRate);
     bomba.move();
  
   }
+  collision.sweepAndPrune();
  }
 } 
 public void keyPressed() {
