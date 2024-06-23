@@ -7,9 +7,11 @@ private Boss boss;
 private float distancia = 800;
 private ArrayList<Bomba> bombas;
 // Variable para controlar el tiempo transcurrido desde el último disparo
-float lastShootTime = 0;
+float lastShootTimeBala = 0;
+float lastShootTimeBomba = 0;
+
 /**Variable para el temporizador que se ejecutara en el juego*/
-private Timmer tiempo;
+public Timmer tiempo;
 // Tiempo de cooldown entre disparos 
 private int cooldownTimeBomba = 2000; //  3 segundo de cooldown
 private int cooldownTimeBala = 500; // 1 segundo de cooldown
@@ -88,31 +90,35 @@ public void keyPressed() {
         float currentTime = millis();
 
         // Verificar si ha pasado el cooldown desde el último disparo con "ENTER"
-        if (currentTime - lastShootTime > cooldownTimeBala) {
+        if (currentTime - lastShootTimeBala > cooldownTimeBala) {
             // Disparar utilizando la tecla "ENTER"
             miTanque.disparar(spawner);
 
             // Actualizar el tiempo del último disparo con "ENTER"
-            lastShootTime = currentTime;
+            lastShootTimeBala = currentTime;
         }
     }
   }
 }
 void mousePressed() {
   if (gestorJuego.getNivelJuego() == MaquinaEstados.PANTALLA_JUGANDOLEVELONE) {
+     if (tiempo.getTime() < 130) {//Indicamos que si el tiempo es menor a 100 se ejecutaran las siguientes sentencias 
+ 
+   
     // Obtener el tiempo actual en milisegundos
     float currentTime = millis();
 
     // Verificar si ha pasado el cooldown desde el último disparo
-    if (currentTime - lastShootTime > cooldownTimeBomba) {
+    if (currentTime - lastShootTimeBomba > cooldownTimeBomba) {
         // Verificar distancia y disparar si es válido
         if (miTanque.getVectorTanqueBoss().getDestino().mag() < distancia) {
             // Disparar y agregar la bomba creada por el jugador a la lista de bombas
             bombas.add(miTanque.disparar());
 
             // Actualizar el tiempo del último disparo al tiempo actual
-            lastShootTime = currentTime;
+            lastShootTimeBomba = currentTime;
         }
     }
 }
+  }
 }
