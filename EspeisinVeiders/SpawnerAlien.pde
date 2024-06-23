@@ -24,7 +24,7 @@ this.espacioY = 10;  // Espacio vertical entre enemigos
      aliens = new Alien[filas][columnas];
     for (int i = 0; i < filas; i++) {
         for (int j = 0; j < columnas; j++) {
-            float posX = j * (anchoAlien + espacioX) + anchoAlien / 2;
+            float posX = j * (anchoAlien + espacioX) + anchoAlien / 2+20;
             float posY = i * (altoAlien + espacioY) + altoAlien / 2;
             aliens[i][j] = new Alien(new PVector(posX, posY));
         }
