@@ -27,6 +27,12 @@ public class Bala extends GameObject implements IVisualizable {
         } else {
             this.posicion.y += this.velocidadPvector.y * Time.getDeltaTime(frameRate);
         }
+        for (Escudo escudo : escudos) {
+        if (!escudo.isDestroyed() && this.posicion.x > escudo.posicion.x && this.posicion.x < escudo.posicion.x + escudo.ancho && this.posicion.y > escudo.posicion.y && this.posicion.y < escudo.posicion.y + escudo.alto) {
+            escudo.hit();
+            // Aquí podrías agregar lógica para destruir la bala también
+        }
+    }
     }
 
     public void display() {

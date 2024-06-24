@@ -7,6 +7,7 @@ private float timer;
 private Boss boss;
 private float distancia = 800;
 private ArrayList<Bomba> bombas;
+private ArrayList<Escudo> escudos; // Lista de escudos
 // Variable para controlar el tiempo transcurrido desde el último disparo
 float lastShootTimeBala = 0;
 float lastShootTimeBomba = 0;
@@ -36,6 +37,10 @@ miTanque = new Tanque();
   tiempo = new Timmer(); // Inicialización del objeto temporizador
 collision = new CollisionDetector(spawner, spawnerAlien);
 frameRate (60);
+escudos = new ArrayList<Escudo>();
+  escudos.add(new Escudo(new PVector(width / 4, height - 100)));
+  escudos.add(new Escudo(new PVector(width / 2, height - 100)));
+  escudos.add(new Escudo(new PVector(3 * width / 4, height - 100)));
 }
 
 public void draw() {
@@ -91,6 +96,11 @@ public void draw() {
         for (Bomba bomba : bombas) {
             bomba.display();
             bomba.move();
+        }
+        for (Escudo escudo : escudos) {
+            if (!escudo.isDestroyed()) {
+                escudo.display();
+            }
         }
 
         collision.sweepAndPrune();
