@@ -98,7 +98,7 @@ public void keyPressed() {
     }
   }
   if (gestorJuego.getNivelJuego() == MaquinaEstados.PANTALLA_JUGANDOLEVELONE) {
-    if (keyCode == ENTER) {
+    if (keyCode == ' ') {
         // Obtener el tiempo actual en milisegundos
         float currentTime = millis();
 

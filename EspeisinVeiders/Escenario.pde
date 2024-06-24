@@ -28,7 +28,7 @@ class Escenario extends GameObject implements IVisualizable {
     this.posicion = new PVector(width/2,height/2);//Define la posicion de la imagen
     switch(tipoFondo) {
       case MaquinaEstados.PANTALLA_INICIANDO: {
-        this.imagen = loadImage("./menu.jpg"); // Cargar imagen de inicio
+        this.imagen = loadImage("./inicio.png"); // Cargar imagen de inicio
        this.imagen.resize(1000, 700); // Redimensionar imagen a 1000x700 píxeles
         break;
       }
@@ -37,7 +37,7 @@ class Escenario extends GameObject implements IVisualizable {
         break;
       }
       case MaquinaEstados.PANTALLA_INSTRUCCIONANDO: {
-        this.imagen = loadImage("./instrucciones.jpg"); // Cargar imagen de instrucciones
+        this.imagen = loadImage("./instrucciones.png"); // Cargar imagen de instrucciones
         this.imagen.resize(1000, 700); // Redimensionar imagen a 1000x700 píxeles
         break;
       }
