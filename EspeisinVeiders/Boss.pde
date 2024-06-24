@@ -9,7 +9,10 @@ class Boss extends GameObject implements IVisualizable {
     private PVector velocidad;
     private int spriteIndex; // Índice para alternar entre los sprites
     private int lastSpriteChangeTime; // Tiempo del último cambio de sprite
-
+    private float anchoCollider;
+    private float altoCollider;
+    private PVector posCollider;
+    
     public Boss() {}
 
     public Boss(PVector posicion) {
@@ -24,6 +27,9 @@ class Boss extends GameObject implements IVisualizable {
         this.cantVida = 50; // Asigna la cantidad de vida del jugador por defecto
         this.spriteIndex = 0; // Inicializa el índice de sprites
         this.lastSpriteChangeTime = millis(); // Inicializa el tiempo del último cambio de sprite
+        this.anchoCollider=350;
+        this.altoCollider=150;
+        this.posCollider=new PVector(this.posicion.x,this.posicion.y);
     }
 
     public Vector getVectorBosse() {
@@ -43,6 +49,8 @@ class Boss extends GameObject implements IVisualizable {
     }
 
     public void display() {
+        rectMode(CENTER);
+        rect(this.posCollider.x,this.posCollider.y,this.anchoCollider,this.altoCollider);
         imageMode(CENTER);
         image(sprites[spriteIndex], this.posicion.x, this.posicion.y);
         fill(255); // Color del texto
@@ -53,7 +61,10 @@ class Boss extends GameObject implements IVisualizable {
     public void move() {
         this.posicion.y += this.velocidad.y * Time.getDeltaTime(frameRate);
         this.posicion.x = width / 2 + 230 * (cos(timer));
-
+        
+        this.posCollider.y += this.velocidad.y * Time.getDeltaTime(frameRate);
+        this.posCollider.x = width / 2 + 230 * (cos(timer));
+        
         // Alternar sprites cada 0.5 segundos
         if (millis() - lastSpriteChangeTime >= 500) {
             spriteIndex = (spriteIndex + 1) % sprites.length;
@@ -65,5 +76,31 @@ class Boss extends GameObject implements IVisualizable {
     public void calcularVectorEnemigoJugador(GameObject player) {
         this.getVectorTanqueBoss().setOrigen(this.getPosicion());
         this.getVectorTanqueBoss().setDestino(PVector.sub(player.posicion, this.posicion).normalize());
+    }
+    
+    public void reducirVida(int cantidad) {
+        this.cantVida -= cantidad;
+        if (this.cantVida < 0) {
+            this.cantVida = 0;
+        }
+    }
+    
+    public PVector getPosCollider(){
+      return this.posCollider;
+    }
+    public void setPosCollider(PVector posCollider){
+    this.posCollider=posCollider;
+    }
+    public float getAnchoCollider(){
+      return this.anchoCollider;
+    }
+    public float getAltoCollider(){
+      return this.altoCollider;
+    }
+    public int getCantVida(){
+      return this.cantVida;
+    }
+    public void setCantVida(int cantVida) {
+        this.cantVida = cantVida;
     }
 }

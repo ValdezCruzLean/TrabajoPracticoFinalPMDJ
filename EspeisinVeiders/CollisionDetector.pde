@@ -30,8 +30,8 @@ class CollisionDetector {
             return;
         }
 
-        System.out.println("Number of aliens: " + aliens.size());
-        System.out.println("Number of balas: " + balas.length);
+        //System.out.println("Number of aliens: " + aliens.size());
+        //System.out.println("Number of balas: " + balas.length);
 
         balas = Arrays.stream(balas)
                       .filter(b -> b != null)
