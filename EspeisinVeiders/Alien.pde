@@ -18,7 +18,7 @@ class Alien extends GameObject implements IVisualizable {
         // Extraer cada frame de la hoja de sprites
         for (int i = 0; i < totalFrames; i++) {
             frames[i] = spritesheet.get(i * frameWidth, 0, frameWidth, frameHeight);
-            frames[i].resize(60, 40); // Redimensionamos cada frame a 60x30
+            frames[i].resize(70, 55); // Redimensionamos cada frame a 60x30
         }
 
         this.currentFrame = 0;
