@@ -58,6 +58,19 @@ class Boss extends GameObject implements IVisualizable {
         text("Boss Life: " + this.cantVida, 50, 50); // Texto que aparecerá en pantalla
     }
 
+   public void disparar(SpawnerBalasEnemigo spawnerBalaEnemigo) {
+   PVector posicionBoss = new PVector(this.posicion.x, this.posicion.y);
+    BalaEnemigo unaBalaEnemigo = new BalaEnemigo(posicionBoss);
+    BalaEnemigo[] balasEnemigo = spawnerBalaEnemigo.getBalasEnemigo();
+    for (int i = 0; i < balasEnemigo.length; i++) {
+      if (balasEnemigo[i] == null) {
+        balasEnemigo[i] = unaBalaEnemigo;
+        break;
+      }
+    }
+    spawnerBalaEnemigo.setBalasEnemigo(balasEnemigo);
+  }
+  
     public void move() {
         this.posicion.y += this.velocidad.y * Time.getDeltaTime(frameRate);
         this.posicion.x = width / 2 + 230 * (cos(timer));
