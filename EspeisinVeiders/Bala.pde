@@ -23,6 +23,7 @@ public class Bala extends GameObject implements IVisualizable {
     public void move() {
         if (bossDetected) {
             this.setPosicion(this.getPosicion().add(this.direccion.normalize().mult(velocidad)));
+            danarBoss(boss);
         } else {
             this.posicion.y += this.velocidadPvector.y * Time.getDeltaTime(frameRate);
         }
