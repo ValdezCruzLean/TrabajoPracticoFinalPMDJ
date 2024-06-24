@@ -22,6 +22,7 @@ public class SpawnerBalas {
             if (b != null) {
                 b.move();
                 b.display();
+                b.danarBoss(boss);
             }
         }
     }
