@@ -34,41 +34,53 @@ collision = new CollisionDetector(spawner, spawnerAlien);
 frameRate (60);
 }
 
-public void draw(){
+public void draw() {
+    background(0);
+    gestorJuego.generarEscenario();
 
-background(0);
- gestorJuego.generarEscenario(); // Generar el escenario del juego
-  if (gestorJuego.getNivelJuego() == MaquinaEstados.PANTALLA_INICIANDO) {//Damos la condicion de que si la pantalla es igual a pantalla_iniciando, las siguientes sentencias se ejecutaran 
-  gestorJuego.setNivelJuego(MaquinaEstados.PANTALLA_INICIANDO);
-   }
- if (gestorJuego.getNivelJuego() == MaquinaEstados.PANTALLA_JUGANDOLEVELONE) { 
-   if (tiempo.getTime() < 130) {//Indicamos que si el tiempo es menor a 100 se ejecutaran las siguientes sentencias 
- boss.display();
- boss.move();
-   }
- spawnerAlien.actualizarAliens();// Actualiza la creacion de los lapices y sus metodos
- spawner.actualizarBalas();
- miTanque.readCommand();
- miTanque.calcularVectorJugadorEnemigo(boss);
- tiempo.countDown(); // Actualizar el temporizador del juegio
+    if (gestorJuego.getNivelJuego() == MaquinaEstados.PANTALLA_INICIANDO) {
+        gestorJuego.setNivelJuego(MaquinaEstados.PANTALLA_INICIANDO);
+    }
 
-timer+=Time.getDeltaTime(frameRate);
-//fill(255);
-//textSize(20);
-//text("Segundos: "+round (timer),20,100);
+    if (gestorJuego.getNivelJuego() == MaquinaEstados.PANTALLA_JUGANDOLEVELONE) {
+        boolean bossDetected = spawnerAlien.areAllAliensDead();
 
- if (miTanque.getVectorTanqueBoss().getDestino().mag() < distancia){
-    miTanque.spin();      
-  } else {
-    miTanque.display();
-  }
-   for(Bomba bomba: bombas){
-    bomba.display();
-    bomba.move();
- 
-  }
-  collision.sweepAndPrune();
- }
+        if (bossDetected) {
+            boss.display();
+            boss.move();
+        } else {
+            spawnerAlien.actualizarAliens();
+        }
+
+        spawnerAlien.actualizarAliens();
+        spawner.actualizarBalas();
+
+        // Actualiza el estado de las balas con respecto a la detección del Boss
+        for (Bala bala : spawner.getBalas()) {
+            if (bala != null) {
+                bala.detectBoss(bossDetected);
+            }
+        }
+
+        miTanque.readCommand();
+        miTanque.calcularVectorJugadorEnemigo(boss);
+        tiempo.countDown();
+
+        timer += Time.getDeltaTime(frameRate);
+
+        if (miTanque.getVectorTanqueBoss().getDestino().mag() < distancia) {
+            miTanque.spin();
+        } else {
+            miTanque.display();
+        }
+
+        for (Bomba bomba : bombas) {
+            bomba.display();
+            bomba.move();
+        }
+
+        collision.sweepAndPrune();
+    }
 } 
 public void keyPressed() {
     // Verificar si se presionó la tecla "ENTER"
