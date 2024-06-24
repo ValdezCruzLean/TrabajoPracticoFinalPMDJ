@@ -1,6 +1,7 @@
 private Tanque miTanque;
 private GestorJuego gestorJuego; 
 private SpawnerBalas spawner;
+private SpawnerBalasEnemigo spawnerBalaEnemigo;
 private SpawnerAlien spawnerAlien;
 private float timer;
 private Boss boss;
@@ -9,12 +10,14 @@ private ArrayList<Bomba> bombas;
 // Variable para controlar el tiempo transcurrido desde el último disparo
 float lastShootTimeBala = 0;
 float lastShootTimeBomba = 0;
+float lastShootTimeBalaEnemigo = 0;
 
 /**Variable para el temporizador que se ejecutara en el juego*/
 public Timmer tiempo;
 // Tiempo de cooldown entre disparos 
 private int cooldownTimeBomba = 2000; //  3 segundo de cooldown
 private int cooldownTimeBala = 500; // 1 segundo de cooldown
+private int cooldownTimeBalaEnemigo = 500; // 1 segundo de cooldown
 
 CollisionDetector collision;
 
@@ -22,6 +25,7 @@ public void setup() {
 //fullScreen ();
 size(800,700);
 boss = new Boss (new PVector (width/2,-100));
+ spawnerBalaEnemigo = new SpawnerBalasEnemigo(1000);
 spawnerAlien = new SpawnerAlien();//Inicializacion del generador de lapices
 spawnerAlien.spawnAliens();
 timer = 0;
@@ -48,12 +52,22 @@ public void draw() {
         if (bossDetected) {
             boss.display();
             boss.move();
+            spawnerBalaEnemigo.actualizarBalasEnemigo();
         } else {
             spawnerAlien.actualizarAliens();
         }
 
         spawnerAlien.actualizarAliens();
         spawner.actualizarBalas();
+        float currentTimeBoss = millis();       
+        if (currentTimeBoss - lastShootTimeBalaEnemigo > cooldownTimeBalaEnemigo) {
+            // Disparar utilizando la tecla "ENTER"
+            boss.disparar(spawnerBalaEnemigo);
+          
+
+            // Actualizar el tiempo del último disparo con "ENTER"
+            lastShootTimeBalaEnemigo = currentTimeBoss;
+        }
 
         // Actualiza el estado de las balas con respecto a la detección del Boss
         for (Bala bala : spawner.getBalas()) {
@@ -106,6 +120,7 @@ public void keyPressed() {
         if (currentTime - lastShootTimeBala > cooldownTimeBala) {
             // Disparar utilizando la tecla "ENTER"
             miTanque.disparar(spawner);
+          
 
             // Actualizar el tiempo del último disparo con "ENTER"
             lastShootTimeBala = currentTime;

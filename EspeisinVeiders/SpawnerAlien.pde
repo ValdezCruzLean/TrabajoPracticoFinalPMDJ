@@ -1,6 +1,6 @@
 class SpawnerAlien {
     private ArrayList<Alien> aliens = new ArrayList<Alien>();
-    private int filas;
+    private int filas; //<>//
     private int columnas;
     private float anchoAlien;
     private float altoAlien;
@@ -8,8 +8,8 @@ class SpawnerAlien {
     private float espacioY;
 
     public SpawnerAlien() {
-        this.filas = 5;
-        this.columnas = 11;
+        this.filas = 1;
+        this.columnas = 1;
         this.anchoAlien = 60;
         this.altoAlien = 30;
         this.espacioX = 10;
