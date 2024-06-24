@@ -10,7 +10,7 @@ class Alien extends GameObject implements IVisualizable {
     private float size;
     public Alien(PVector posicion) {
         this.posicion = posicion;
-        this.velocidad = new PVector(2, height / 20); // Velocidad vertical constante
+        this.velocidad = new PVector(2, height / 100); // Velocidad vertical constante
         this.spritesheet = loadImage("Enemy.png");
         this.totalFrames = 6; // número total de frames en la hoja de sprites
         this.frames = new PImage[totalFrames];
