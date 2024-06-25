@@ -8,6 +8,10 @@ class Alien extends GameObject implements IVisualizable {
     private int lastFrameChangeTime;
     private int frameInterval = 1000; // cambiar frame cada 1000 ms (1 segundo)
     private float size;
+    
+   // private float timerOffset; // Desplazamiento aleatorio para el movimiento oscilante
+    private float initialX; // Posición X inicial
+    
     public Alien(PVector posicion) {
         this.posicion = posicion;
         this.velocidad = new PVector(2, height / 100); // Velocidad vertical constante
@@ -23,6 +27,11 @@ class Alien extends GameObject implements IVisualizable {
 
         this.currentFrame = 0;
         this.lastFrameChangeTime = millis();
+        
+          // Inicializar el desplazamiento aleatorio para el movimiento oscilante
+        //this.timerOffset = random(TWO_PI);
+        // Guardar la posición X inicial
+        this.initialX = posicion.x;
     }
 
     public void display() {
@@ -32,6 +41,10 @@ class Alien extends GameObject implements IVisualizable {
 
     public void move() {
         this.posicion.y += this.velocidad.y * Time.getDeltaTime(frameRate);
+        //this.posicion.x = height/2+ 100*(cos(timer));
+         //this.posicion.x = width / 2 + 100 * (cos(timer + this.timerOffset)); // Añadir el offset al timer
+         this.posicion.x = this.initialX + 200 * (cos(timer*0.5)); // Usar la posición X inicial
+
       //  this.posicion.x += this.velocidad.x * Time.getDeltaTime(frameRate);
 
         // Cambiar frame cada segundo
