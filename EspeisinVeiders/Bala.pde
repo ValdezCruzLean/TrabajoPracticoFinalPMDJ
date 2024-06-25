@@ -23,12 +23,12 @@ public class Bala extends GameObject implements IVisualizable {
     public void move() {
         if (bossDetected) {
             this.setPosicion(this.getPosicion().add(this.direccion.normalize().mult(velocidad)));
-            danarBoss(boss);
+            danarBoss(boss,spawner);
         } else {
             this.posicion.y += this.velocidadPvector.y * Time.getDeltaTime(frameRate);
         }
         for (Escudo escudo : escudos) {
-          danarEscudo(escudo);
+          danarEscudo(escudo,spawner);
           
        // if (!escudo.isDestroyed() && this.posicion.x > escudo.posicion.x && this.posicion.x < escudo.posicion.x + escudo.ancho && this.posicion.y > escudo.posicion.y && this.posicion.y < escudo.posicion.y + escudo.alto) {
            
@@ -43,7 +43,7 @@ public class Bala extends GameObject implements IVisualizable {
         ellipse(posicion.x, posicion.y, 10, 10);
     }
     
-    public void danarBoss(Boss boss){
+    public void danarBoss(Boss boss, SpawnerBalas spawner){
     float closestX = clamp(this.posicion.x,boss.getPosCollider().x - boss.getAnchoCollider()/2, boss.getPosCollider().x + boss.getAnchoCollider()/2);
     float closestY = clamp(this.posicion.y,boss.getPosCollider().y - boss.getAltoCollider()/2, boss.getPosCollider().y + boss.getAltoCollider()/2);
     
@@ -52,8 +52,9 @@ public class Bala extends GameObject implements IVisualizable {
     
     if((distanciaX * distanciaX + distanciaY * distanciaY) < (this.size/2 * this.size/2)){
       println("Hay colision");
-      this.posicion = new PVector(-1000,-1000);
+     // this.posicion = new PVector(-1000,-1000);
       boss.reducirVida(1);
+      spawner.removeBala(this);
     }
     }
     private float clamp(float value, float min, float max) {
@@ -61,10 +62,11 @@ public class Bala extends GameObject implements IVisualizable {
       if (value > max) return max;
       return value;
     }
-    public void danarEscudo(Escudo escudo){
+    public void danarEscudo(Escudo escudo, SpawnerBalas spawner){
       if(dist(this.posicion.x,this.posicion.y,escudo.posicion.x, escudo.posicion.y)<(this.size/2+escudo.size/2)){
         escudo.hit();
            println("Hay colision escudo");
+           spawner.removeBala(this);
       }
     }
 }
