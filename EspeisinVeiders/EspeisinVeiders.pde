@@ -23,8 +23,8 @@ private int cooldownTimeBalaEnemigo = 500; // 1 segundo de cooldown
 CollisionDetector collision;
 
 public void setup() {
-//fullScreen ();
-size(800,700);
+fullScreen ();
+//size(800,700);
 boss = new Boss (new PVector (width/2,-150));
  spawnerBalaEnemigo = new SpawnerBalasEnemigo(1000);
 spawnerAlien = new SpawnerAlien();//Inicializacion del generador de lapices
@@ -38,9 +38,9 @@ miTanque = new Tanque();
 collision = new CollisionDetector(spawner, spawnerAlien);
 frameRate (60);
 escudos = new ArrayList<Escudo>();
-  escudos.add(new Escudo(new PVector(width / 4, height - 100)));
-  escudos.add(new Escudo(new PVector(width / 2, height - 100)));
-  escudos.add(new Escudo(new PVector(3 * width / 4, height - 100)));
+  escudos.add(new Escudo(new PVector(width / 4, height - 250)));
+  escudos.add(new Escudo(new PVector(width / 2-50, height - 250)));
+  escudos.add(new Escudo(new PVector(3 * width / 4-100, height - 250)));
 }
 
 public void draw() {
