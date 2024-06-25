@@ -28,11 +28,14 @@ public class Bala extends GameObject implements IVisualizable {
             this.posicion.y += this.velocidadPvector.y * Time.getDeltaTime(frameRate);
         }
         for (Escudo escudo : escudos) {
-        if (!escudo.isDestroyed() && this.posicion.x > escudo.posicion.x && this.posicion.x < escudo.posicion.x + escudo.ancho && this.posicion.y > escudo.posicion.y && this.posicion.y < escudo.posicion.y + escudo.alto) {
-            escudo.hit();
+          danarEscudo(escudo);
+          
+       // if (!escudo.isDestroyed() && this.posicion.x > escudo.posicion.x && this.posicion.x < escudo.posicion.x + escudo.ancho && this.posicion.y > escudo.posicion.y && this.posicion.y < escudo.posicion.y + escudo.alto) {
+           // escudo.hit();
+           // this.posicion = new PVector(-1000,-1000);
             // Aquí podrías agregar lógica para destruir la bala también
-        }
-        }
+      //  }
+      }
     }
 
     public void display() {
@@ -57,5 +60,10 @@ public class Bala extends GameObject implements IVisualizable {
       if (value < min) return min;
       if (value > max) return max;
       return value;
+    }
+    public void danarEscudo(Escudo escudo){
+      if(dist(this.posicion.x,this.posicion.y,escudo.posicion.x, escudo.posicion.y)<(this.size/2+escudo.size/2)){
+           println("Hay colision escudo");
+      }
     }
 }
