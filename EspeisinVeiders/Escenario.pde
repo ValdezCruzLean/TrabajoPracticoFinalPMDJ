@@ -33,7 +33,8 @@ class Escenario extends GameObject implements IVisualizable {
         break;
       }
      case MaquinaEstados.PANTALLA_JUGANDOLEVELONE: {
-        this.imagen = loadImage("./inicio.jpg"); // Cargar imagen de juego
+        this.imagen = loadImage("./juego.png"); // Cargar imagen de juego
+        this.imagen.resize(1000, 700); // Redimensionar imagen a 1000x700 píxeles
         break;
       }
       case MaquinaEstados.PANTALLA_INSTRUCCIONANDO: {
