@@ -32,7 +32,7 @@ public class Bala extends GameObject implements IVisualizable {
             escudo.hit();
             // Aquí podrías agregar lógica para destruir la bala también
         }
-    }
+        }
     }
 
     public void display() {

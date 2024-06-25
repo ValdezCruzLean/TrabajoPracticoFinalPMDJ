@@ -96,6 +96,7 @@ public void draw() {
         for (Bomba bomba : bombas) {
             bomba.display();
             bomba.move();
+            bomba.detectBoss(bossDetected);
         }
         for (Escudo escudo : escudos) {
             if (!escudo.isDestroyed()) {
