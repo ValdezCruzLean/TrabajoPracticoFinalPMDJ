@@ -31,7 +31,7 @@ public class Bala extends GameObject implements IVisualizable {
           danarEscudo(escudo);
           
        // if (!escudo.isDestroyed() && this.posicion.x > escudo.posicion.x && this.posicion.x < escudo.posicion.x + escudo.ancho && this.posicion.y > escudo.posicion.y && this.posicion.y < escudo.posicion.y + escudo.alto) {
-           // escudo.hit();
+           
            // this.posicion = new PVector(-1000,-1000);
             // Aquí podrías agregar lógica para destruir la bala también
       //  }
@@ -63,6 +63,7 @@ public class Bala extends GameObject implements IVisualizable {
     }
     public void danarEscudo(Escudo escudo){
       if(dist(this.posicion.x,this.posicion.y,escudo.posicion.x, escudo.posicion.y)<(this.size/2+escudo.size/2)){
+        escudo.hit();
            println("Hay colision escudo");
       }
     }
