@@ -8,7 +8,7 @@ class SpawnerAlien {
     private float espacioY;
 
     public SpawnerAlien() {
-        this.filas =6;
+        this.filas =5;
         this.columnas = 8 ;
         this.anchoAlien = 60;
         this.altoAlien = 30;
@@ -28,8 +28,9 @@ class SpawnerAlien {
 
     public void actualizarAliens() {
         for (Alien a : aliens) {
+          a.display();
             a.move();
-            a.display();
+            //a.display();
         }
     }
 
