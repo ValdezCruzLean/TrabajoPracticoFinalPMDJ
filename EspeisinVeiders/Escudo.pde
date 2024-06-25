@@ -36,4 +36,12 @@ class Escudo extends GameObject implements IVisualizable {
     public boolean isDestroyed() {
         return durabilidad <= 0;
     }
+    public void removeEscudo(Escudo escudo) {
+        for (int i = 0; i < escudos.size(); i++) {
+            if (escudos.get(i) == escudo) {
+                escudos.remove(i);
+                break;
+            }
+        }
+    }
 }

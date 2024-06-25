@@ -25,7 +25,7 @@ CollisionDetector collision;
 public void setup() {
 //fullScreen ();
 size(800,700);
-boss = new Boss (new PVector (width/2,-100));
+boss = new Boss (new PVector (width/2,-150));
  spawnerBalaEnemigo = new SpawnerBalasEnemigo(1000);
 spawnerAlien = new SpawnerAlien();//Inicializacion del generador de lapices
 spawnerAlien.spawnAliens();
@@ -101,7 +101,9 @@ public void draw() {
         for (Escudo escudo : escudos) {
             if (!escudo.isDestroyed()) {
                 escudo.display();
-            }
+            }else{
+              escudo.removeEscudo(escudo);
+              }
         }
 
         collision.sweepAndPrune();
