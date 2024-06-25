@@ -8,7 +8,7 @@ class Tanque extends GameObject implements IVisualizable{
     this.isDetected = false;
     this.vectorTanque = new Vector(this.posicion, new PVector(0,-1,0));
     this.vectorTanqueBoss = new Vector();
-    this.posicion = new PVector(width/2,height-20);
+    this.posicion = new PVector(width/2,height-160);
     this.imagen = loadImage("Player.png");
     this.velocidad = new PVector(300,0);
   }

@@ -16,7 +16,7 @@ class Escudo extends GameObject implements IVisualizable {
     }
 
     public void display() {
-        fill(#CE36AD);
+        fill(0,0);
         strokeWeight(0);
        // rectMode(CENTER);
       //  rect(posicion.x, posicion.y, ancho, alto);
