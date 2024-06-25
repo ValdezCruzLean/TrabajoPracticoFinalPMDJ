@@ -105,6 +105,7 @@ public void draw() {
         }
 
         collision.sweepAndPrune();
+     //   bala.danarEscudo();
     }
 } 
 public void keyPressed() {

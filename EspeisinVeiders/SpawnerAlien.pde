@@ -8,8 +8,8 @@ class SpawnerAlien {
     private float espacioY;
 
     public SpawnerAlien() {
-        this.filas = 6;
-        this.columnas = 8;
+        this.filas =6;
+        this.columnas = 8 ;
         this.anchoAlien = 60;
         this.altoAlien = 30;
         this.espacioX = 10;
