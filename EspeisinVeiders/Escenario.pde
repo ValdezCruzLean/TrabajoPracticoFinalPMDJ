@@ -33,7 +33,7 @@ class Escenario extends GameObject implements IVisualizable {
         break;
       }
      case MaquinaEstados.PANTALLA_JUGANDOLEVELONE: {
-        this.imagen = loadImage("./juego.png"); // Cargar imagen de juego
+        this.imagen = loadImage("./juego.jpg"); // Cargar imagen de juego
         this.imagen.resize(width, height); // Redimensionar imagen a 1000x700 píxeles
         break;
       }
@@ -42,16 +42,16 @@ class Escenario extends GameObject implements IVisualizable {
        this.imagen.resize(width, height); // Redimensionar imagen a 1000x700 píxeles
         break;
       }
-     /* case MaquinaEstados.PANTALLA_PERDIENDO: {
-        this.imagen = loadImage("perdiste.png"); // Cargar imagen de perdiste
-        this.imagen.resize(1000, 700); // Redimensionar imagen a 1000x700 píxeles
+     case MaquinaEstados.PANTALLA_PERDIENDO: {
+        this.imagen = loadImage("./perdiendo.jpg"); // Cargar imagen de perdiste
+        this.imagen.resize(width, height); // Redimensionar imagen a 1000x700 píxeles
         break;
       }
       case MaquinaEstados.PANTALLA_GANANDO: {
-        this.imagen = loadImage("ganaste.png"); // Cargar imagen de ganaste
-        this.imagen.resize(1000, 700); // Redimensionar imagen a 1000x700 píxeles
+        this.imagen = loadImage("youWin.jpg"); // Cargar imagen de ganaste
+        this.imagen.resize(width, height); // Redimensionar imagen a 1000x700 píxeles
         break;
-      }*/
+      }
     }
   }
 /**

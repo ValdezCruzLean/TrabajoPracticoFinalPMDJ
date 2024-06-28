@@ -17,14 +17,14 @@ float lastShootTimeBalaEnemigo = 0;
 public Timmer tiempo;
 // Tiempo de cooldown entre disparos 
 private int cooldownTimeBomba = 2000; //  3 segundo de cooldown
-private int cooldownTimeBala = 500; // 1 segundo de cooldown
+private int cooldownTimeBala = 100; // 1 segundo de cooldown
 private int cooldownTimeBalaEnemigo = 500; // 1 segundo de cooldown
 
 CollisionDetector collision;
 
 public void setup() {
-fullScreen ();
-//size(800,700);
+//fullScreen ();
+size(1000,900);
 boss = new Boss (new PVector (width/2,-150));
  spawnerBalaEnemigo = new SpawnerBalasEnemigo(1000);
 spawnerAlien = new SpawnerAlien();//Inicializacion del generador de lapices
@@ -57,7 +57,7 @@ public void draw() {
         if (bossDetected) {
             boss.display();
             boss.move();
-            spawnerBalaEnemigo.actualizarBalasEnemigo();
+            spawnerBalaEnemigo.actualizarBalasEnemigo(miTanque);
         } else {
             spawnerAlien.actualizarAliens();
         }
@@ -83,21 +83,22 @@ public void draw() {
 
         miTanque.readCommand();
         miTanque.calcularVectorJugadorEnemigo(boss);
+        miTanque.displayLife();
         tiempo.countDown();
 
         timer += Time.getDeltaTime(frameRate);
 
         if (miTanque.getVectorTanqueBoss().getDestino().mag() < distancia) {
             miTanque.spin();
+             for (Bomba bomba : bombas) {
+            bomba.display();
+            bomba.move();
+        }
         } else {
             miTanque.display();
         }
 
-        for (Bomba bomba : bombas) {
-            bomba.display();
-            bomba.move();
-            bomba.detectBoss(bossDetected);
-        }
+       
         for (Escudo escudo : escudos) {
             if (!escudo.isDestroyed()) {
                 escudo.display();
@@ -109,6 +110,28 @@ public void draw() {
         collision.sweepAndPrune();
      //   bala.danarEscudo();
     }
+        if (gestorJuego.getNivelJuego() == MaquinaEstados.PANTALLA_JUGANDOLEVELONE && boss.getCantVida()== 0) {
+          gestorJuego.setNivelJuego(MaquinaEstados.PANTALLA_GANANDO);
+        }
+        
+        if ( boss.getPosicion().x >= height) {
+          gestorJuego.setNivelJuego(MaquinaEstados.PANTALLA_GANANDO);
+        }
+        
+         // Verificar si la posición en Y del Boss es >= 800
+        if (boss.getPosicion().y >= 800 || miTanque.getCantVida()== 0) {
+            gestorJuego.setNivelJuego(MaquinaEstados.PANTALLA_PERDIENDO);
+        }
+
+        // Verificar si la posición en Y de cualquier Alien es >= 800
+        for (Alien alien : spawnerAlien.getAliens()) {
+            if (alien.getPosicion().y >= 800) {
+                gestorJuego.setNivelJuego(MaquinaEstados.PANTALLA_PERDIENDO);
+                break; // No es necesario seguir verificando si uno ya cumple la condición
+            }
+        }
+        
+        
 } 
 public void keyPressed() {
     // Verificar si se presionó la tecla "ENTER"
@@ -140,14 +163,9 @@ public void keyPressed() {
             lastShootTimeBala = currentTime;
         }
     }
-  }
-}
-void mousePressed() {
-  if (gestorJuego.getNivelJuego() == MaquinaEstados.PANTALLA_JUGANDOLEVELONE) {
-     if (tiempo.getTime() < 130) {//Indicamos que si el tiempo es menor a 100 se ejecutaran las siguientes sentencias 
- 
-   
-    // Obtener el tiempo actual en milisegundos
+    
+    if (keyCode == CONTROL ){
+        // Obtener el tiempo actual en milisegundos
     float currentTime = millis();
 
     // Verificar si ha pasado el cooldown desde el último disparo
@@ -161,6 +179,7 @@ void mousePressed() {
             lastShootTimeBomba = currentTime;
         }
     }
-}
+    
   }
+}
 }

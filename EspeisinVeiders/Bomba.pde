@@ -15,11 +15,9 @@ class Bomba extends GameObject{
     this.bossDetected = false;
   }
   
- public void detectBoss(boolean detected) {
-        this.bossDetected = detected; // Método para actualizar el estado del Boss
-    }
     
   public void display(){
+    fill(0,0);
     ellipse(posicion.x, posicion.y, size, size);
     imageMode(CENTER);
     image(this.imagen, this.posicion.x, this.posicion.y, 40, 60);
@@ -27,14 +25,10 @@ class Bomba extends GameObject{
   
  
   public void move(){
-    //this.setPosicion(this.getPosicion().add(this.direccion.normalize().mult(velocidad)));
-    if (bossDetected) {
+    
             this.setPosicion(this.getPosicion().add(this.direccion.normalize().mult(velocidad)));
             danarBoss(boss);
-        } 
-        else {
-            this.posicion.y += this.velocidadPvector.y * Time.getDeltaTime(frameRate);
-        }
+       
   }
   
     public void danarBoss(Boss boss){
@@ -47,7 +41,7 @@ class Bomba extends GameObject{
     if((distanciaX * distanciaX + distanciaY * distanciaY) < (this.size/2 * this.size/2)){
       println("Hay colision");
       this.posicion = new PVector(-1000,-1000);
-      boss.reducirVida(5);
+      boss.reducirVida(100);
     }
     }
     private float clamp(float value, float min, float max) {

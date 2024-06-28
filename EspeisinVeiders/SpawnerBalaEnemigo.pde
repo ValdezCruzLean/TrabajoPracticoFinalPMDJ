@@ -17,12 +17,12 @@ public class SpawnerBalasEnemigo {
         this.balasEnemigo = balasEnemigo;
     }
 
-    public void actualizarBalasEnemigo() {
+    public void actualizarBalasEnemigo(Tanque tanque) {
         for (BalaEnemigo b : balasEnemigo) {
             if (b != null) {
                 b.move();
                 b.display();
-                //b.disparar(this.);
+                b.danarTanque(tanque, this); // Verificar colisión y dañar tanque si es necesario
             }
         }
     }
