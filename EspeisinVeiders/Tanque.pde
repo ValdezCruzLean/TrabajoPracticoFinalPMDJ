@@ -112,11 +112,11 @@ Esto asegura que la bala se añade al primer espacio disponible en el arreglo.*/
 /*Este metodo muestra la cantidad de vida del jugador en la pantalla.*/  
    public void displayLife() {
       /*Color del texto*/   
-       fill(255); 
+       fill(#E4F289); 
       /*Tamaño del texto*/ 
-        textSize(20); 
+        textSize(35); 
      /*Texto que aparecerá en pantalla y su ubicacion*/   
-        text("Player Life: " + this.cantVida, 600, 200); 
+        text("Player Life: " + this.cantVida, 150, 105); 
   }
   
    public void displayCenter(){
