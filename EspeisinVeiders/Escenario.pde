@@ -41,6 +41,7 @@ class Escenario extends GameObject implements IVisualizable {
         this.imagen = loadImage("./instrucciones.png"); // Cargar imagen de instrucciones
        this.imagen.resize(width, height); // Redimensionar imagen a 1000x700 píxeles
         break;
+        //break
       }
      case MaquinaEstados.PANTALLA_PERDIENDO: {
         this.imagen = loadImage("./perdiendo.jpg"); // Cargar imagen de perdiste
