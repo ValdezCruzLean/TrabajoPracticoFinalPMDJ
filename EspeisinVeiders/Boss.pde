@@ -18,13 +18,13 @@ class Boss extends GameObject implements IVisualizable {
 
     public Boss(PVector posicion) {
         this.posicion = posicion;
-        this.velocidad = new PVector(1, height / 20);
+        this.velocidad = new PVector(1, height / 100);
         this.spriteSheet = loadImage("Boss.png"); // Carga la imagen que contiene los sprites
         this.sprite1 = spriteSheet.get(0, 0, 340, spriteSheet.height); // Sprite desde 0 a 340
         this.sprite2 = spriteSheet.get(345, 0, 338, spriteSheet.height); // Sprite desde 345 a 683
         this.vectorBoss = new Vector(this.posicion, new PVector(1, 0));
         this.vectorTanqueBoss = new Vector();
-        this.cantVida = 50; // Asigna la cantidad de vida del jugador por defecto
+        this.cantVida = 1000; // Asigna la cantidad de vida del jugador por defecto
         this.isSprite1 = true; // Inicializa usando el primer sprite
         this.lastSpriteChangeTime = millis(); // Inicializa el tiempo del último cambio de sprite
         this.anchoCollider=350;

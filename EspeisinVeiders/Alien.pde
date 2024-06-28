@@ -43,7 +43,7 @@ class Alien extends GameObject implements IVisualizable {
         this.posicion.y += this.velocidad.y * Time.getDeltaTime(frameRate);
         //this.posicion.x = height/2+ 100*(cos(timer));
          //this.posicion.x = width / 2 + 100 * (cos(timer + this.timerOffset)); // Añadir el offset al timer
-         this.posicion.x = this.initialX + 200 * (cos(timer*0.5)); // Usar la posición X inicial
+         this.posicion.x = this.initialX + 200 * (cos(timer*0.3)); // Usar la posición X inicial
 
       //  this.posicion.x += this.velocidad.x * Time.getDeltaTime(frameRate);
 

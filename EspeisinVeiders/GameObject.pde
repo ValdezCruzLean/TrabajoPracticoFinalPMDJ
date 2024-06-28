@@ -5,6 +5,7 @@
 abstract class GameObject {
 /** Variable que representa la posicion de la clase GameObject*/
   protected PVector posicion;
+  /* Variable que representa la velocidad de la clase GameObject*/
   protected PVector velocidad;
   //---------Zona de constructores-------------------
   /**
@@ -38,14 +39,14 @@ abstract class GameObject {
     return this.posicion;
   }
    /**
-    Asigna la posición del objeto GameObject.  
+    Asigna la velocidad del objeto GameObject.  
    */
   public void setVelocidad(PVector velocidad) {
     this.velocidad = velocidad;
   }
 
   /**
-    Obtiene la posición del objeto GameObject.   
+    Obtiene la velocidad del objeto GameObject.   
    */
   public PVector getVelocidad() {
     return this.velocidad;
