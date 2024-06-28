@@ -1,14 +1,18 @@
 public class BalaEnemigo extends GameObject implements IVisualizable {
-    private PVector direccion;
-    private float velocidad;
-    private PVector velocidadPvector;
+    /*Variable tipo PVector que representa la direccion en la que se mueve la bala.*/
+   // private PVector direccion;
+ /*Variable velocidad tipo float de la bala cuando se esta detectando el Boss.*/    
+   // private float velocidad;
+/*Variable velocidadPvector tipo PVector de la bala cuando se esta detectando el Boss*/    
+   private PVector velocidadPvector;
+/*Variable float que representa el tamaño de la bala*/    
     private float size;
 
     public BalaEnemigo() {}
 
     public BalaEnemigo(PVector posicion) {
         this.posicion = posicion;
-        this.velocidad = 30;
+        this.velocidad = new PVector(0,30);
         this.velocidadPvector = new PVector(0, 500);
         this.size = 20;
     }
@@ -18,7 +22,7 @@ public class BalaEnemigo extends GameObject implements IVisualizable {
     }
 
     public void display() {
-        fill(#F7E111);
+        fill(#D81414);
         ellipse(posicion.x, posicion.y, size, size);
     }
 

@@ -50,6 +50,7 @@ class Boss extends GameObject implements IVisualizable {
 
     public void display() {
         rectMode(CENTER);
+        fill(0,0);
         rect(this.posCollider.x,this.posCollider.y,this.anchoCollider,this.altoCollider);
         imageMode(CENTER);
         if (isSprite1) {
@@ -57,9 +58,9 @@ class Boss extends GameObject implements IVisualizable {
         } else {
             image(sprite2, this.posicion.x, this.posicion.y);
         }
-        fill(255); // Color del texto
-        textSize(40); // Tamaño del texto
-        text("Boss Life: " + this.cantVida, 50, 50); // Texto que aparecerá en pantalla
+        fill(#95090E); // Color del texto
+        textSize(35); // Tamaño del texto
+        text("Boss Life: " + this.cantVida, 550, 105); // Texto que aparecerá en pantalla
     }
 
     public void disparar(SpawnerBalasEnemigo spawnerBalaEnemigo) {

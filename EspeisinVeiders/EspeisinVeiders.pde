@@ -12,20 +12,21 @@ private ArrayList<Escudo> escudos; // Lista de escudos
 float lastShootTimeBala = 0;
 float lastShootTimeBomba = 0;
 float lastShootTimeBalaEnemigo = 0;
-
 /**Variable para el temporizador que se ejecutara en el juego*/
 public Timmer tiempo;
 // Tiempo de cooldown entre disparos 
 private int cooldownTimeBomba = 2000; //  3 segundo de cooldown
 private int cooldownTimeBala = 100; // 1 segundo de cooldown
 private int cooldownTimeBalaEnemigo = 500; // 1 segundo de cooldown
-
+private SpawnerBossAttack spawnerBossAttack;
 CollisionDetector collision;
 
 public void setup() {
 //fullScreen ();
 size(1000,900);
 boss = new Boss (new PVector (width/2,-150));
+spawnerBossAttack= new SpawnerBossAttack(13);
+spawnerBossAttack.spawnAttacks();
  spawnerBalaEnemigo = new SpawnerBalasEnemigo(1000);
 spawnerAlien = new SpawnerAlien();//Inicializacion del generador de lapices
 spawnerAlien.spawnAliens();
@@ -53,6 +54,7 @@ public void draw() {
 
     if (gestorJuego.getNivelJuego() == MaquinaEstados.PANTALLA_JUGANDOLEVELONE) {
         boolean bossDetected = spawnerAlien.areAllAliensDead();
+        miTanque.displayLife();
 
         if (bossDetected) {
             boss.display();
@@ -61,7 +63,10 @@ public void draw() {
         } else {
             spawnerAlien.actualizarAliens();
         }
+        if(tiempo.getTime()>130){
+                  spawnerBossAttack.actualizarBalasEnemigo(miTanque);
 
+        }
         spawnerAlien.actualizarAliens();
         spawner.actualizarBalas();
         float currentTimeBoss = millis();       
@@ -83,7 +88,6 @@ public void draw() {
 
         miTanque.readCommand();
         miTanque.calcularVectorJugadorEnemigo(boss);
-        miTanque.displayLife();
         tiempo.countDown();
 
         timer += Time.getDeltaTime(frameRate);

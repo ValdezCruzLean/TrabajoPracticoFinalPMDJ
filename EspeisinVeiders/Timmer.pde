@@ -14,7 +14,7 @@ public class Timmer extends GameObject implements IVisualizable {
    */
   public Timmer() {
     this.time = 146;//Asigna el tiempo por defecto
-    this.posicion = new PVector(1040, 150); //Asigna una posicion por defecto
+    this.posicion = new PVector(750, 175); //Asigna una posicion por defecto
     imagen = loadImage("reloj.png"); //Asigna una imagen por defecto
   }
 
