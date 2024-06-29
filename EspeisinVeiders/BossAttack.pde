@@ -53,7 +53,7 @@ public class BossAttack extends GameObject implements IVisualizable {
          danarEscudo(escudo2);
          danarEscudo(escudo3);
     }
-/*Metodo el cual se encarga de Comprueba si hay colisión con el tanque y le resta vida*/
+/*Metodo el cual se encarga que comprueba si hay colisión con el tanque y le resta vida*/
     public void danarTanque(Tanque tanque) {
       /*Se calcula la distancia entre la posicion del ataque y la del tanque.*/
       /*Si la distancia es menor que la suma de los radios del ataque y del tanque se considera una colision.*/

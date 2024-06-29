@@ -80,7 +80,7 @@ public void draw() {
         } else {
             spawnerAlien.actualizarAliens();
         }
-        if(tiempo.getTime()>112){
+        if(tiempo.getTime()>90){
                   spawnerBossAttack.actualizarBalasEnemigo(miTanque);
 
         }

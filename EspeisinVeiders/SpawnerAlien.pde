@@ -1,4 +1,4 @@
-/*Clase SpawnerAlien que se encarga de gestionar la creacion y actualizacion de objetos Alien en el juego. */ //<>//
+/*Clase SpawnerAlien que se encarga de gestionar la creacion y actualizacion de objetos Alien en el juego. */ //<>// //<>//
 class SpawnerAlien {
   /*Atributo que representa una lista de aliens que se gestionan en el juego.*/
     private ArrayList<Alien> aliens = new ArrayList<Alien>();
