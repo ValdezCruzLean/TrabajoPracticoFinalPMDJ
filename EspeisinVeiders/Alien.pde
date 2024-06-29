@@ -1,53 +1,58 @@
+/*La clase Alien extiende GameObject e implementa todos los metodos de IVisualizable.
+Representa el alien en el juego que tiene una animacion de multiples frames y un movimiento oscilante.*/
 class Alien extends GameObject implements IVisualizable {
+  /*Atributo Pimagen que contiene todos los frames de la animacion del alien.*/
     private PImage spritesheet;
+  /*Atributo tipo arreglo que almacena cada frame de la animacion extraído del spritesheet.*/
     private PImage[] frames;
+  /*Índice del frame actual que se está mostrando.*/  
     private int currentFrame;
+    /*Atributo tipo entero que representa el numero total de frames en la hoja de sprites.*/
     private int totalFrames;
-    private int frameWidth = 115; // Ancho de cada frame
-    private int frameHeight = 100; // Alto de cada frame
+    /*Atributo tipo entero que representa ancho de cada frame en la hoja de sprites.*/
+    private int frameWidth = 115; 
+   /*Atributo tipo entero que representa alto de cada frame en la hoja de sprites.*/
+    private int frameHeight = 100; 
+    /*Atributo tipo entero que representa tiempo en milisegundos desde el ultimo cambio de frame.*/
     private int lastFrameChangeTime;
-    private int frameInterval = 1000; // cambiar frame cada 1000 ms (1 segundo)
+    /*Atributo tipo entero que representa el intervalo de tiempo en milisegundos para cambiar el frame (1 segundo).*/
+    private int frameInterval = 1000; 
+    /*Atriburo tipo int que representa tamaño del alien*/
     private float size;
-    
-   // private float timerOffset; // Desplazamiento aleatorio para el movimiento oscilante
-    private float initialX; // Posición X inicial
+    /*Atributo tipo entero que representa la posicion X inicial del alien para el movimiento oscilante.*/
+    private float initialX; 
     
     public Alien(PVector posicion) {
         this.posicion = posicion;
-        this.velocidad = new PVector(2, height / 100); // Velocidad vertical constante
+        this.velocidad = new PVector(2, height / 150); 
         this.spritesheet = loadImage("Enemy.png");
-        this.totalFrames = 6; // número total de frames en la hoja de sprites
+        this.totalFrames = 6; 
         this.frames = new PImage[totalFrames];
         this.size = 40;
-        // Extraer cada frame de la hoja de sprites
+        /* Extraer cada frame de la hoja de sprites*/
         for (int i = 0; i < totalFrames; i++) {
             frames[i] = spritesheet.get(i * frameWidth, 0, frameWidth, frameHeight);
             frames[i].resize(70, 55); // Redimensionamos cada frame a 60x30
         }
-
+        
         this.currentFrame = 0;
         this.lastFrameChangeTime = millis();
-        
-          // Inicializar el desplazamiento aleatorio para el movimiento oscilante
-        //this.timerOffset = random(TWO_PI);
-        // Guardar la posición X inicial
         this.initialX = posicion.x;
     }
-
+ /*Metodo encargado de la representacion visual del alien en la pantalla.*/
     public void display() {
         imageMode(CENTER);
+     /*Se dibuja el frame actual en la posicion del alien*/
         image(frames[currentFrame], this.posicion.x, this.posicion.y);
     }
-
+  /*Metodo que se encarga de mover el alien en el juego*/
     public void move() {
         this.posicion.y += this.velocidad.y * Time.getDeltaTime(frameRate);
-        //this.posicion.x = height/2+ 100*(cos(timer));
-         //this.posicion.x = width / 2 + 100 * (cos(timer + this.timerOffset)); // Añadir el offset al timer
-         this.posicion.x = this.initialX + 200 * (cos(timer*0.3)); // Usar la posición X inicial
-
-      //  this.posicion.x += this.velocidad.x * Time.getDeltaTime(frameRate);
-
-        // Cambiar frame cada segundo
+        /*Se actualiza la posicion en x para crear un movimiento oscilante*/
+         this.posicion.x = this.initialX +75 * (cos(timer*0.7)); 
+      
+        /*Si el tiempo transcurrido desde el ultimo cambio de frame es mayor que el intervalo de frame ,
+          se actualiza el frame actual al siguiente frame de manera circular*/
         if (millis() - lastFrameChangeTime > frameInterval) {
             currentFrame = (currentFrame + 1) % totalFrames;
             lastFrameChangeTime = millis();
