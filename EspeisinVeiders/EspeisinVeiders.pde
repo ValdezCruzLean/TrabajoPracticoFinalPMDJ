@@ -7,7 +7,6 @@ private float timer;
 private Boss boss;
 private float distancia = 800;
 private ArrayList<Bomba> bombas;
-private ArrayList<Escudo> escudos; // Lista de escudos
 // Variable para controlar el tiempo transcurrido desde el último disparo
 float lastShootTimeBala = 0;
 float lastShootTimeBomba = 0;
@@ -20,6 +19,10 @@ private int cooldownTimeBala = 100; // 1 segundo de cooldown
 private int cooldownTimeBalaEnemigo = 500; // 1 segundo de cooldown
 private SpawnerBossAttack spawnerBossAttack;
 CollisionDetector collision;
+private Escudo escudo1; 
+Escudo escudo2; 
+Escudo escudo3; 
+
 
 public void setup() {
 //fullScreen ();
@@ -38,10 +41,11 @@ miTanque = new Tanque();
   tiempo = new Timmer(); // Inicialización del objeto temporizador
 collision = new CollisionDetector(spawner, spawnerAlien);
 frameRate (60);
-escudos = new ArrayList<Escudo>();
-  escudos.add(new Escudo(new PVector(width / 4, height - 250)));
-  escudos.add(new Escudo(new PVector(width / 2-50, height - 250)));
-  escudos.add(new Escudo(new PVector(3 * width / 4-100, height - 250)));
+escudo1 = new Escudo(new PVector(width / 4, height - 250));
+escudo2 = new Escudo(new PVector(width / 2 -50 , height - 250));
+escudo3 = new Escudo(new PVector(3*width/4-100 , height - 250));
+
+
 }
 
 public void draw() {
@@ -55,6 +59,19 @@ public void draw() {
     if (gestorJuego.getNivelJuego() == MaquinaEstados.PANTALLA_JUGANDOLEVELONE) {
         boolean bossDetected = spawnerAlien.areAllAliensDead();
         miTanque.displayLife();
+ escudo1.display();
+  escudo2.display();
+ escudo3.display();
+ 
+ if(escudo1.getDurabilidad() == 0){
+   escudo1.sacarEscudo();
+ }
+  if(escudo2.getDurabilidad() == 0){
+   escudo2.sacarEscudo();
+ }
+  if(escudo3.getDurabilidad() == 0){
+   escudo3.sacarEscudo();
+ }
 
         if (bossDetected) {
             boss.display();
@@ -63,7 +80,7 @@ public void draw() {
         } else {
             spawnerAlien.actualizarAliens();
         }
-        if(tiempo.getTime()>130){
+        if(tiempo.getTime()>112){
                   spawnerBossAttack.actualizarBalasEnemigo(miTanque);
 
         }
@@ -103,13 +120,7 @@ public void draw() {
         }
 
        
-        for (Escudo escudo : escudos) {
-            if (!escudo.isDestroyed()) {
-                escudo.display();
-            }else{
-              escudo.removeEscudo(escudo);
-              }
-        }
+     
 
         collision.sweepAndPrune();
      //   bala.danarEscudo();

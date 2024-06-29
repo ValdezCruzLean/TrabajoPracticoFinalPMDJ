@@ -10,24 +10,46 @@ public class BossAttack extends GameObject implements IVisualizable {
    
 
     public BossAttack() {
-        this.posicion = new PVector(random(width), random(-300)); //Asigna la posicion de la clase lapiz por defecto        this.velocidad = 30;
+        this.posicion = new PVector(random(200,width-200), random(-200)); //Asigna la posicion de la clase lapiz por defecto        this.velocidad = 30;
         this.velocidadPvector = new PVector(0, 500);
-        this.size = 10;
+        this.size = 15;
+        this.velocidad = new PVector(10, 30);
+
     }
 
     public void move() {
-        this.posicion.y += this.velocidadPvector.y * Time.getDeltaTime(frameRate);
-        
-         if (posicion.y > height) {//Condicional si la posicion en y es mayor al alto de la pantalla
-      posicion.y = random(-400); // Si se encuentra fuera de la pantalla, se reinicia su posición en y de forma aleatoria
-      posicion.x = random(width);// Si se encuentra fuera de la pantalla, se reinicia su posición en x de forma aleatoria
-    }
+          posicion.add(velocidad);
+         if (posicion.y < -200 || posicion.y > height-150 ) {
+    // Calcular el vector normal para el borde vertical
+    PVector normalVertical = new PVector(0, 1);
+    // Calcular el producto punto entre la velocidad y el vector normal
+    float productoPuntoVertical = velocidad.dot(normalVertical);
+    // Reflexionar la velocidad sobre el vector normal
+    velocidad.sub(PVector.mult(normalVertical, 2 * productoPuntoVertical));
+  }
+  if (this.posicion.y > height-150){
+  this.posicion.y= -100;
+    this.posicion.x= random(200,width-200);
+
+  }
+  if (posicion.x < 100 || posicion.x > width - 190) {
+    // Calcular el vector normal para el borde horizontal
+    PVector normalHorizontal = new PVector(1, 0);
+    // Calcular el producto punto entre la velocidad y el vector normal
+    float productoPuntoHorizontal = velocidad.dot(normalHorizontal);
+    // Reflexionar la velocidad sobre el vector normal
+    velocidad.sub(PVector.mult(normalHorizontal, 2 * productoPuntoHorizontal));
+  }
+     
   }
     
 
     public void display() {
         fill(#25C1A1);
         ellipse(posicion.x, posicion.y, size, size);
+        danarEscudo(escudo1);
+         danarEscudo(escudo2);
+         danarEscudo(escudo3);
     }
 
     public void danarTanque(Tanque tanque, SpawnerBossAttack spawner) {
@@ -36,5 +58,19 @@ public class BossAttack extends GameObject implements IVisualizable {
             tanque.reducirVida(3); // Reduce la vida del tanque
            // spawner.removeBalaEnemigo(this); // Remueve la bala enemiga
         }
+    }
+    
+    /*Este método maneja la colisión de la bala con un objeto Escudo*/
+    public void danarEscudo(Escudo escudo){
+      /*Se verifica si la distancia es menor que la suma de los radios de la bala y el escudo existe colision*/
+      if(dist(this.posicion.x,this.posicion.y,escudo.posicion.x, escudo.posicion.y)<(this.size/2+escudo.size/2)){
+        escudo.reducirDurabilidad(1);
+          // Calcular el vector normal para el borde vertical
+    PVector normalVertical = new PVector(0, 1);
+    // Calcular el producto punto entre la velocidad y el vector normal
+    float productoPuntoVertical = velocidad.dot(normalVertical);
+    // Reflexionar la velocidad sobre el vector normal
+    velocidad.sub(PVector.mult(normalVertical, 2 * productoPuntoVertical));
+      }
     }
 }

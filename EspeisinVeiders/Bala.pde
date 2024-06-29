@@ -37,15 +37,18 @@ public class Bala extends GameObject implements IVisualizable {
           /* Si bossDetected es false, la bala se mueve verticalmente utilizando velocidadPvector. */
             this.posicion.y += this.velocidadPvector.y * Time.getDeltaTime(frameRate);
         }
-        for (Escudo escudo : escudos) {
-          danarEscudo(escudo,spawner);
+ 
+         danarEscudo(escudo1,spawner);
+         danarEscudo(escudo2,spawner);
+         danarEscudo(escudo3,spawner);
+
           
        // if (!escudo.isDestroyed() && this.posicion.x > escudo.posicion.x && this.posicion.x < escudo.posicion.x + escudo.ancho && this.posicion.y > escudo.posicion.y && this.posicion.y < escudo.posicion.y + escudo.alto) {
            
            // this.posicion = new PVector(-1000,-1000);
             // Aquí podrías agregar lógica para destruir la bala también
       //  }
-      }
+      
     }
 /*Metodo encargado de la representacion visual de la bala en la pantalla.*/
     public void display() {
@@ -84,7 +87,7 @@ public class Bala extends GameObject implements IVisualizable {
     public void danarEscudo(Escudo escudo, SpawnerBalas spawner){
       /*Se verifica si la distancia es menor que la suma de los radios de la bala y el escudo existe colision*/
       if(dist(this.posicion.x,this.posicion.y,escudo.posicion.x, escudo.posicion.y)<(this.size/2+escudo.size/2)){
-        escudo.hit();
+        escudo.reducirDurabilidad(1);
            println("Hay colision escudo");
            spawner.removeBala(this);
       }

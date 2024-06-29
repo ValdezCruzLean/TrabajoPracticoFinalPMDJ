@@ -24,6 +24,9 @@ public class BalaEnemigo extends GameObject implements IVisualizable {
     public void display() {
         fill(#D81414);
         ellipse(posicion.x, posicion.y, size, size);
+         danarEscudo(escudo1);
+         danarEscudo(escudo2);
+         danarEscudo(escudo3);
     }
 
     public void danarTanque(Tanque tanque, SpawnerBalasEnemigo spawner) {
@@ -32,5 +35,12 @@ public class BalaEnemigo extends GameObject implements IVisualizable {
             tanque.reducirVida(10); // Reduce la vida del tanque
             spawner.removeBalaEnemigo(this); // Remueve la bala enemiga
         }
+    }
+    public void danarEscudo(Escudo escudo){
+      /*Se verifica si la distancia es menor que la suma de los radios de la bala y el escudo existe colision*/
+      if(dist(this.posicion.x,this.posicion.y,escudo.posicion.x, escudo.posicion.y)<(this.size/2+escudo.size/2)){
+        escudo.reducirDurabilidad(100);
+           println("Hay colision escudo");
+      }
     }
 }
