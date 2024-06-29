@@ -30,7 +30,7 @@ class SpawnerAlien {
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
       /*posX y posY calculan las posiciones de cada alien, considerando el tamaño de los aliens y el espacio entre ellos.*/
-                float posX = j * (anchoAlien + espacioX) + anchoAlien / 2;
+                float posX = j * (anchoAlien + espacioX) + anchoAlien / 2 +190;
                 float posY = i * (altoAlien + espacioY) + altoAlien / 2;
           /*Se crea un nuevo objeto Alien en cada posicion calculada y se agrega a la lista aliens.*/      
                 aliens.add(new Alien(new PVector(posX, posY)));
