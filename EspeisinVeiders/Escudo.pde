@@ -10,7 +10,7 @@ class Escudo extends GameObject implements IVisualizable {
         this.size = 100; 
         //this.ancho =100; // Ancho del escudo
        // this.alto = 80; // Alto del escudo
-        this.durabilidad = 5; // Número de impactos que puede recibir antes de ser destruido
+        this.durabilidad = 100; // Número de impactos que puede recibir antes de ser destruido
         this.imagen = loadImage("./escudo.png");
 
     }
@@ -24,24 +24,25 @@ class Escudo extends GameObject implements IVisualizable {
         image(imagen, this.posicion.x, this.posicion.y);
         imagen.resize(100, 80);
     }
-     public void displayCenter(){
-    imageMode(CENTER);
-   image(this.imagen, 0, 0, 100, 60);
+  
+  
+  public void sacarEscudo(){
+          posicion = new PVector(-200,this.posicion.y);
+
   }
 
-    public void hit() {
-        durabilidad--;
-    }
-
-    public boolean isDestroyed() {
-        return durabilidad <= 0;
-    }
-    public void removeEscudo(Escudo escudo) {
-        for (int i = 0; i < escudos.size(); i++) {
-            if (escudos.get(i) == escudo) {
-                escudos.remove(i);
-                break;
-            }
+   public void reducirDurabilidad(int cantidad) {
+        this.durabilidad -= cantidad;
+        if (this.durabilidad < 0) {
+            this.durabilidad = 0;
         }
     }
+       public int getDurabilidad() {
+        return this.durabilidad;
+    }
+
+    public void setDurabilidad(int durabilidad) {
+        this.durabilidad = durabilidad;
+    }
+   
 }
