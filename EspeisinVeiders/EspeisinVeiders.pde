@@ -13,6 +13,10 @@ private AudioPlayer ganandoAudio;
 /**Reproductor del audio al perder el juego*/
 private AudioPlayer perdiendoAudio;
 /**Variable para el temporizador que se ejecutara en el juego*/
+/**Reproductor del audio del laser*/
+private AudioPlayer laserAudio;
+/**Reproductor del audio de la bomba*/
+private AudioPlayer bombaAudio;
 private Tanque miTanque;
 private GestorJuego gestorJuego; 
 private SpawnerBalas spawner;
@@ -65,6 +69,8 @@ jugandoAudio = minim.loadFile("Jugando.mp3");//Cargamos la musica de jugandoAdud
 bossAudio = minim.loadFile("Boss.mp3");//Cargamos la musica de bossAudio
 ganandoAudio = minim.loadFile("Ganando.mp3");//Cargamos la musica de ganandoAdudio
 perdiendoAudio = minim.loadFile("Perdiendo.mp3");//Cargamos la musica de perdiendoAudio
+laserAudio = minim.loadFile("Laser.mp3");//Cargamos el sonido laser
+bombaAudio = minim.loadFile("Bomb.mp3");//Cargamos el sonido bomba
 inicioAudio.loop();//Reproducimos la muxica de InicioAudio
 
 }
@@ -207,6 +213,8 @@ public void keyPressed() {
         if (currentTime - lastShootTimeBala > cooldownTimeBala) {
             // Disparar utilizando la tecla "ENTER"
             miTanque.disparar(spawner);
+            laserAudio.rewind(); //reinicia el sonido si ya fue reproducido
+            laserAudio.play(); //reproduce el sonido
           
 
             // Actualizar el tiempo del último disparo con "ENTER"
@@ -224,6 +232,8 @@ public void keyPressed() {
         if (miTanque.getVectorTanqueBoss().getDestino().mag() < distancia) {
             // Disparar y agregar la bomba creada por el jugador a la lista de bombas
             bombas.add(miTanque.disparar());
+            bombaAudio.rewind();
+            bombaAudio.play();
 
             // Actualizar el tiempo del último disparo al tiempo actual
             lastShootTimeBomba = currentTime;
