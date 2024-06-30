@@ -1,3 +1,18 @@
+/**Importa archivos de la biblioteca minim*/
+import ddf.minim.*;
+/**Atributo Minim de la importacion del archivo minim*/
+private Minim minim;
+/**Reproductor del audio para el inicio del juego*/
+private AudioPlayer inicioAudio;
+/**Reproductor del audio durante la jugabilidad*/
+private AudioPlayer jugandoAudio;
+/**Reproductor del audio durante la fase del Jefe*/
+private AudioPlayer bossAudio;
+/**Reproductor del audio al ganar el juego*/
+private AudioPlayer ganandoAudio;
+/**Reproductor del audio al perder el juego*/
+private AudioPlayer perdiendoAudio;
+/**Variable para el temporizador que se ejecutara en el juego*/
 private Tanque miTanque;
 private GestorJuego gestorJuego; 
 private SpawnerBalas spawner;
@@ -44,7 +59,13 @@ frameRate (60);
 escudo1 = new Escudo(new PVector(width / 4, height - 250));
 escudo2 = new Escudo(new PVector(width / 2 -50 , height - 250));
 escudo3 = new Escudo(new PVector(3*width/4-100 , height - 250));
-
+minim = new Minim(this);//Inicializacion de la biblioteca Minim
+inicioAudio = minim.loadFile("Inicio.mp3");//Cargamos la musica para IniocioAudio
+jugandoAudio = minim.loadFile("Jugando.mp3");//Cargamos la musica de jugandoAdudio
+bossAudio = minim.loadFile("Boss.mp3");//Cargamos la musica de bossAudio
+ganandoAudio = minim.loadFile("Ganando.mp3");//Cargamos la musica de ganandoAdudio
+perdiendoAudio = minim.loadFile("Perdiendo.mp3");//Cargamos la musica de perdiendoAudio
+inicioAudio.loop();//Reproducimos la muxica de InicioAudio
 
 }
 
@@ -77,6 +98,10 @@ public void draw() {
             boss.display();
             boss.move();
             spawnerBalaEnemigo.actualizarBalasEnemigo(miTanque);
+            jugandoAudio.pause();//Pausamos la musica jugandoAudio
+            bossAudio.play(); //Reproducimos la musica de bossAudio
+            bossAudio.setGain(-10.0); //cambia el volumen de la cancion
+            
         } else {
             spawnerAlien.actualizarAliens();
         }
@@ -127,22 +152,31 @@ public void draw() {
     }
         if (gestorJuego.getNivelJuego() == MaquinaEstados.PANTALLA_JUGANDOLEVELONE && boss.getCantVida()== 0) {
           gestorJuego.setNivelJuego(MaquinaEstados.PANTALLA_GANANDO);
+          bossAudio.pause();//Pausamos la musica bossAudio
+          ganandoAudio.play(); //Reproducimos la musica de jugandoAudio
         }
         
         if ( boss.getPosicion().x >= height) {
           gestorJuego.setNivelJuego(MaquinaEstados.PANTALLA_GANANDO);
+          
         }
         
          // Verificar si la posición en Y del Boss es >= 800
         if (boss.getPosicion().y >= 800 || miTanque.getCantVida()== 0) {
             gestorJuego.setNivelJuego(MaquinaEstados.PANTALLA_PERDIENDO);
+            bossAudio.pause();//Pausamos la musica bossAudio
+            perdiendoAudio.play(); //Reproducimos la musica de perdiendoAudio
+            perdiendoAudio.setGain(-10.0); //cambia el volumen de la cancion
         }
 
         // Verificar si la posición en Y de cualquier Alien es >= 800
         for (Alien alien : spawnerAlien.getAliens()) {
             if (alien.getPosicion().y >= 800) {
-                gestorJuego.setNivelJuego(MaquinaEstados.PANTALLA_PERDIENDO);
-                break; // No es necesario seguir verificando si uno ya cumple la condición
+                 gestorJuego.setNivelJuego(MaquinaEstados.PANTALLA_PERDIENDO);
+                 jugandoAudio.pause();//Pausamos la musica jugandoAudio
+                 perdiendoAudio.play(); //Reproducimos la musica de perdiendoAudio
+                 perdiendoAudio.setGain(-10.0); //cambia el volumen de la cancion
+                 break; // No es necesario seguir verificando si uno ya cumple la condición
             }
         }
         
@@ -159,8 +193,9 @@ public void keyPressed() {
   if (key == 'c' || key == 'C') { // Si se presiona la tecla 'C' o 'c' se ejecutara la siguiente sentencia
     if (gestorJuego.getNivelJuego() == MaquinaEstados.PANTALLA_INSTRUCCIONANDO) {//Cambia la pantalla de intriccionando a la de jugando
       gestorJuego.setNivelJuego(MaquinaEstados.PANTALLA_JUGANDOLEVELONE);
-    //  inicioAudio.pause();//Pausamos la musica inicoAudio
-   //  jugandoAudio.loop(); //Reproducimos la musica de jugandoAudio en un bucle
+      inicioAudio.pause();//Pausamos la musica inicoAudio
+      jugandoAudio.play(); //Reproducimos la musica de jugandoAudio en un bucle
+      
     }
   }
   if (gestorJuego.getNivelJuego() == MaquinaEstados.PANTALLA_JUGANDOLEVELONE) {
