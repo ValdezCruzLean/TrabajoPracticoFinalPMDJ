@@ -41,11 +41,13 @@ private CollisionDetector collision;
 private Escudo escudo1; 
 private Escudo escudo2; 
 private Escudo escudo3; 
-
+PFont font;
 
 public void setup() {
 //fullScreen ();
 size(1000,900);
+font = loadFont("DePixel-Bold-20.vlw");
+textFont(font);
 boss = new Boss (new PVector (width/2,-150));
 spawnerBossAttack= new SpawnerBossAttack(13);
 spawnerBossAttack.spawnAttacks();

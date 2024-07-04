@@ -114,9 +114,9 @@ Esto asegura que la bala se añade al primer espacio disponible en el arreglo.*/
       /*Color del texto*/   
        fill(#E4F289); 
       /*Tamaño del texto*/ 
-        textSize(35); 
+        textSize(20); 
      /*Texto que aparecerá en pantalla y su ubicacion*/   
-        text("Player Life: " + this.cantVida, 150, 105); 
+        text("Player Life < " + this.cantVida +" >", 150, 175); 
   }
   
    public void displayCenter(){
