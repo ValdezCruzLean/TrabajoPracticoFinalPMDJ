@@ -10,13 +10,13 @@ class Alien extends GameObject implements IVisualizable {
     /*Atributo tipo entero que representa el numero total de frames en la hoja de sprites.*/
     private int totalFrames;
     /*Atributo tipo entero que representa ancho de cada frame en la hoja de sprites.*/
-    private int frameWidth = 115; 
+    private int frameWidth; 
    /*Atributo tipo entero que representa alto de cada frame en la hoja de sprites.*/
-    private int frameHeight = 100; 
+    private int frameHeight; 
     /*Atributo tipo entero que representa tiempo en milisegundos desde el ultimo cambio de frame.*/
     private int lastFrameChangeTime;
     /*Atributo tipo entero que representa el intervalo de tiempo en milisegundos para cambiar el frame (1 segundo).*/
-    private int frameInterval = 1000; 
+    private int frameInterval; 
     /*Atriburo tipo int que representa tamaño del alien*/
     private float size;
     /*Atributo tipo entero que representa la posicion X inicial del alien para el movimiento oscilante.*/
@@ -29,6 +29,9 @@ class Alien extends GameObject implements IVisualizable {
         this.totalFrames = 6; 
         this.frames = new PImage[totalFrames];
         this.size = 40;
+        this.frameWidth = 115;
+        this.frameHeight = 100;
+        this.frameInterval = 1000;
         /* Extraer cada frame de la hoja de sprites*/
         for (int i = 0; i < totalFrames; i++) {
             frames[i] = spritesheet.get(i * frameWidth, 0, frameWidth, frameHeight);
