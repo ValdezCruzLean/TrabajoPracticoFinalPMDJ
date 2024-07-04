@@ -38,6 +38,7 @@ private int cooldownTimeBala = 400; // 1 segundo de cooldown
 private int cooldownTimeBalaEnemigo = 350; // 1 segundo de cooldown
 private SpawnerBossAttack spawnerBossAttack;
 private CollisionDetector collision;
+/*-------*/
 private Escudo escudo1; 
 private Escudo escudo2; 
 private Escudo escudo3; 
