@@ -18,24 +18,32 @@ private AudioPlayer laserAudio;
 /**Reproductor del audio de la bomba*/
 private AudioPlayer bombaAudio;
 private Tanque miTanque;
+/** Administra los diferentes escenarios */
 private GestorJuego gestorJuego; 
 private SpawnerBalas spawner;
 private SpawnerBalasEnemigo spawnerBalaEnemigo;
 private SpawnerAlien spawnerAlien;
+/** Variable que representa el DeltaTime */
 private float timer;
 private Boss boss;
+/** Variable que representa la distancia entre el tanque y el boss */
 private float distancia = 800;
 private ArrayList<Bomba> bombas;
-// Variable para controlar el tiempo transcurrido desde el último disparo
+/** Variable para controlar el tiempo transcurrido desde el último disparo*/
 private float lastShootTimeBala = 0;
+/** Variable para controlar el tiempo transcurrido desde la última bomba*/
 private float lastShootTimeBomba = 0;
+/** Variable para controlar el tiempo transcurrido desde el último disparo enemigo*/
 private float lastShootTimeBalaEnemigo = 0;
 
-// Tiempo de cooldown entre disparos 
+/** Tiempo que tarda en habilitarse un nuevo disparo de la bomba */
 private int cooldownTimeBomba = 3000; //  3 segundo de cooldown
+/** Tiempo que tarda en habilitarse un nuevo disparo de la bala */
 private int cooldownTimeBala = 400; // 1 segundo de cooldown
+/** Tiempo que tarda en habilitarse un nuevo disparo de la bala enemiga  */
 private int cooldownTimeBalaEnemigo = 260; // 1 segundo de cooldown
 private SpawnerBossAttack spawnerBossAttack;
+/** Variable que representa la colision entre las balas y los aliens usando el sweep and prune*/
 private CollisionDetector collision;
 /*-------*/
 private Escudo escudo1; 
@@ -43,6 +51,7 @@ private Escudo escudo2;
 private Escudo escudo3; 
 PFont font;
 
+/** Método que inicializa el sketch y sus elementos */
 public void setup() {
 //fullScreen ();
 size(1200,800);
@@ -76,6 +85,7 @@ inicioAudio.loop();//Reproducimos la muxica de InicioAudio
 
 }
 
+/** Método que se ejcuta continuamente*/
 public void draw() {
     background(0);
     gestorJuego.generarEscenario();
@@ -118,11 +128,10 @@ public void draw() {
         spawner.actualizarBalas();
         float currentTimeBoss = millis();       
         if (currentTimeBoss - lastShootTimeBalaEnemigo > cooldownTimeBalaEnemigo) {
-            // Disparar utilizando la tecla "ENTER"
+            // Disparar utilizando la tecla "ESPACIO"
             boss.disparar(spawnerBalaEnemigo);
           
-
-            // Actualizar el tiempo del último disparo con "ENTER"
+            // Actualizar el tiempo del último disparo con "ESPACIO"
             lastShootTimeBalaEnemigo = currentTimeBoss;
         }
 
@@ -161,7 +170,7 @@ public void draw() {
         
       
         
-         // Verificar si la posición en Y del Boss es >= 800
+         // Verificar si la posición en Y del Boss es >= 600
         if (boss.getPosicion().y >= 600 || miTanque.getCantVida()== 0) {
             gestorJuego.setNivelJuego(MaquinaEstados.PANTALLA_PERDIENDO);
             bossAudio.pause();//Pausamos la musica bossAudio
