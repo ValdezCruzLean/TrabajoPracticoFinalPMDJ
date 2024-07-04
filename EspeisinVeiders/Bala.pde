@@ -3,9 +3,7 @@ public class Bala extends GameObject implements IVisualizable {
   /*Variable tipo PVector que representa la direccion en la que se mueve la bala.*/
     private PVector direccion;
  /*Variable velocidad tipo float de la bala cuando se esta detectando el Boss.*/    
-    private float velocidad;
-/*Variable velocidadPvector tipo PVector de la bala cuando se esta detectando el Boss*/    
-    private PVector velocidadPvector;
+    private float velocidadfloat;
 /*Variable float que representa el tamaño de la bala*/    
     private float size;
 /*Variable tipo booleana para detectar al Boss*/    
@@ -16,9 +14,9 @@ public class Bala extends GameObject implements IVisualizable {
  /*Constructor parametrizado*/
     public Bala(PVector posicion, PVector direccion) {
         this.posicion = posicion;
-        this.velocidad = 30;
+        this.velocidadfloat = 30;
         this.direccion = direccion;
-        this.velocidadPvector = new PVector(0, -500);
+        this.velocidad = new PVector(0, -500);
         this.size = 10;
         this.bossDetected = false; 
     }
@@ -31,11 +29,11 @@ public class Bala extends GameObject implements IVisualizable {
       /*Si bossDetected es true, la bala se mueve en la dirección especificada por direccion a una velocidad determinada (velocidad). 
       Ademas, se llama al metodo danarBoss() para causar daño al jefe si hay colisión.*/
         if (bossDetected) {
-            this.setPosicion(this.getPosicion().add(this.direccion.normalize().mult(velocidad)));
+            this.setPosicion(this.getPosicion().add(this.direccion.normalize().mult(velocidadfloat)));
             danarBoss(boss,spawner);
         } else {
           /* Si bossDetected es false, la bala se mueve verticalmente utilizando velocidadPvector. */
-            this.posicion.y += this.velocidadPvector.y * Time.getDeltaTime(frameRate);
+            this.posicion.y += this.velocidad.y * Time.getDeltaTime(frameRate);
         }
  
          danarEscudo(escudo1,spawner);
