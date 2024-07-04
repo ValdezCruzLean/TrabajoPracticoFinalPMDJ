@@ -95,7 +95,7 @@ class Boss extends GameObject implements IVisualizable {
         }
         fill(#95090E); // Color del texto
         textSize(35); // Tamaño del texto
-        text("Boss Life: " + this.cantVida, 550, 105); // Texto que aparecerá en pantalla
+        text("Boss Life: " + this.cantVida, 600, 175); // Texto que aparecerá en pantalla
     }
   /*Metodo disparar que permite al boss disparar al jugador  */
     public void disparar(SpawnerBalasEnemigo spawnerBalaEnemigo) {

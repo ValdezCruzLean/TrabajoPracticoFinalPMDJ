@@ -30,8 +30,7 @@ private ArrayList<Bomba> bombas;
 private float lastShootTimeBala = 0;
 private float lastShootTimeBomba = 0;
 private float lastShootTimeBalaEnemigo = 0;
-/**Variable para el temporizador que se ejecutara en el juego*/
-public Timmer tiempo;
+
 // Tiempo de cooldown entre disparos 
 private int cooldownTimeBomba = 3000; //  3 segundo de cooldown
 private int cooldownTimeBala = 400; // 1 segundo de cooldown
@@ -60,7 +59,6 @@ miTanque = new Tanque();
  spawner = new SpawnerBalas(1000);
  bombas = new ArrayList<Bomba>();
  gestorJuego = new GestorJuego(); // Inicialización del objeto gestor de juego
-  tiempo = new Timmer(); // Inicialización del objeto temporizador
 collision = new CollisionDetector(spawner, spawnerAlien);
 frameRate (60);
 escudo1 = new Escudo(new PVector(width / 4, height - 250));
@@ -115,10 +113,7 @@ public void draw() {
             spawnerAlien.actualizarAliens();
              spawnerBossAttack.actualizarBalasEnemigo(miTanque);
         }
-        if(tiempo.getTime()>90){
-                 
 
-        }
         spawnerAlien.actualizarAliens();
         spawner.actualizarBalas();
         float currentTimeBoss = millis();       
@@ -140,8 +135,6 @@ public void draw() {
 
         miTanque.readCommand();
         miTanque.calcularVectorJugadorEnemigo(boss);
-        tiempo.countDown();
-
         timer += Time.getDeltaTime(frameRate);
 
         if (miTanque.getVectorTanqueBoss().getDestino().mag() < distancia) {
