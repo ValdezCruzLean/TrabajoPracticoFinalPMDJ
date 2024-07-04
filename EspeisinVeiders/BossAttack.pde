@@ -9,7 +9,7 @@ public class BossAttack extends GameObject implements IVisualizable {
     public BossAttack() {
         this.posicion = new PVector(random(200,width-200), random(-200)); 
         this.size = 15;
-        this.velocidad = new PVector(10, 30);
+        this.velocidad = new PVector(5, 15);
 
     }
      /*Metodo encarga de lograr mover los ataques en la pantalla.*/
