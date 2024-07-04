@@ -1,4 +1,4 @@
-/*La clase BossAttack extiende GameObject e mplementa todos los metodos de IVisualizable.. 
+/*La clase BossAttack extiende GameObject e implementa todos los metodos de IVisualizable.. 
 Representa un ataque inicial del jefe en el juego.*/
 public class BossAttack extends GameObject implements IVisualizable {
   /*Atributo tipo PVevtor que epresenta el tamaño del ataque del jefe.*/
