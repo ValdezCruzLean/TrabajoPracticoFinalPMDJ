@@ -5,7 +5,7 @@ class Escudo extends GameObject implements IVisualizable {
     private int durabilidad;
   /*Variable Pimage que representa magen del escudo.*/
     private PImage imagen;
-  /*Variable entera que representa el tamaño del Boss.*/  
+  /*Variable entera que representa el tamaño del escudo.*/  
     private float size;
 // -----------Zona de Constructores----------------
 
@@ -35,7 +35,7 @@ class Escudo extends GameObject implements IVisualizable {
 /*Metodo que reduce la cantidad de durabilidad del escudo.*/
    public void reducirDurabilidad(int cantidad) {
         this.durabilidad -= cantidad;
-  /*Si la vida del tanque es menor a 0, se establece a 0 para evitar valores negativos.*/      
+  /*Si la durabilidad del escudo es menor a 0, se establece a 0 para evitar valores negativos.*/      
         if (this.durabilidad < 0) {
             this.durabilidad = 0;
         }
