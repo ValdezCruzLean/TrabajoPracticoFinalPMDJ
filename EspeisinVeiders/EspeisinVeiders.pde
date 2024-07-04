@@ -27,20 +27,20 @@ private Boss boss;
 private float distancia = 800;
 private ArrayList<Bomba> bombas;
 // Variable para controlar el tiempo transcurrido desde el último disparo
-float lastShootTimeBala = 0;
-float lastShootTimeBomba = 0;
-float lastShootTimeBalaEnemigo = 0;
+private float lastShootTimeBala = 0;
+private float lastShootTimeBomba = 0;
+private float lastShootTimeBalaEnemigo = 0;
 /**Variable para el temporizador que se ejecutara en el juego*/
 public Timmer tiempo;
 // Tiempo de cooldown entre disparos 
-private int cooldownTimeBomba = 2000; //  3 segundo de cooldown
-private int cooldownTimeBala = 100; // 1 segundo de cooldown
-private int cooldownTimeBalaEnemigo = 500; // 1 segundo de cooldown
+private int cooldownTimeBomba = 3000; //  3 segundo de cooldown
+private int cooldownTimeBala = 400; // 1 segundo de cooldown
+private int cooldownTimeBalaEnemigo = 350; // 1 segundo de cooldown
 private SpawnerBossAttack spawnerBossAttack;
-CollisionDetector collision;
+private CollisionDetector collision;
 private Escudo escudo1; 
-Escudo escudo2; 
-Escudo escudo3; 
+private Escudo escudo2; 
+private Escudo escudo3; 
 
 
 public void setup() {
@@ -168,7 +168,7 @@ public void draw() {
         }
         
          // Verificar si la posición en Y del Boss es >= 800
-        if (boss.getPosicion().y >= 800 || miTanque.getCantVida()== 0) {
+        if (boss.getPosicion().y >= 680 || miTanque.getCantVida()== 0) {
             gestorJuego.setNivelJuego(MaquinaEstados.PANTALLA_PERDIENDO);
             bossAudio.pause();//Pausamos la musica bossAudio
             perdiendoAudio.play(); //Reproducimos la musica de perdiendoAudio
@@ -177,7 +177,7 @@ public void draw() {
 
         // Verificar si la posición en Y de cualquier Alien es >= 800
         for (Alien alien : spawnerAlien.getAliens()) {
-            if (alien.getPosicion().y >= 800) {
+            if (alien.getPosicion().y >= 710) {
                  gestorJuego.setNivelJuego(MaquinaEstados.PANTALLA_PERDIENDO);
                  jugandoAudio.pause();//Pausamos la musica jugandoAudio
                  perdiendoAudio.play(); //Reproducimos la musica de perdiendoAudio

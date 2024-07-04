@@ -1,6 +1,6 @@
 /*La clase Bomba extiende extiende de GameObject e implementa todos los metodos de IVisualizable.
 representa una bomba que dispara el tanque hacia la direccion del boss*/
-class Bomba extends GameObject{ 
+class Bomba extends GameObject implements IVisualizable{ 
   /*Atributo tipo float que representa la velocidad de la bomba.*/
   private float velocidad;
   /*Atributo tipo tipo PVector que representa la dirección en la que se mueve la bomba.*/
