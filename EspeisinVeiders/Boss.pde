@@ -29,7 +29,7 @@ class Boss extends GameObject implements IVisualizable {
   /*Constructor parametrizado*/
     public Boss(PVector posicion) {
         this.posicion = posicion;
-        this.velocidad = new PVector(1, height / 100);
+        this.velocidad = new PVector(1, height / 10);
         this.spriteSheet = loadImage("Boss.png"); 
         this.sprite1 = spriteSheet.get(0, 0, 340, spriteSheet.height); 
         this.sprite2 = spriteSheet.get(345, 0, 338, spriteSheet.height); 
@@ -116,10 +116,13 @@ class Boss extends GameObject implements IVisualizable {
     public void move() {
       /*La posicion x e y del boss se actualiza continuamente.*/
         this.posicion.y += this.velocidad.y * Time.getDeltaTime(frameRate);
-        this.posicion.x = width / 2 + 230 * (cos(timer));
-        
+        this.posicion.x = 550 + 400 * (cos(timer));
+        if(this.posicion.y > 100){
+       this.velocidad = new PVector(1, height / 90);
+
+        }
         this.posCollider.y += this.velocidad.y * Time.getDeltaTime(frameRate);
-        this.posCollider.x = width / 2 + 230 * (cos(timer));
+        this.posCollider.x = 550 + 400 * (cos(timer));
         
         /* Alternar sprites cada 0.5 segundos*/
         if (millis() - lastSpriteChangeTime >= 500) {

@@ -18,7 +18,7 @@ class SpawnerAlien {
 /*Constructor por defecto*/
     public SpawnerAlien() {
         this.filas =5;
-        this.columnas = 8   ;
+        this.columnas = 9;
         this.anchoAlien = 60;
         this.altoAlien = 30;
         this.espacioX = 10;
@@ -30,7 +30,7 @@ class SpawnerAlien {
         for (int i = 0; i < filas; i++) {
             for (int j = 0; j < columnas; j++) {
       /*posX y posY calculan las posiciones de cada alien, considerando el tamaño de los aliens y el espacio entre ellos.*/
-                float posX = j * (anchoAlien + espacioX) + anchoAlien / 2 +190;
+                float posX = j * (anchoAlien + espacioX) + anchoAlien / 2 +250;
                 float posY = i * (altoAlien + espacioY) + altoAlien / 2;
           /*Se crea un nuevo objeto Alien en cada posicion calculada y se agrega a la lista aliens.*/      
                 aliens.add(new Alien(new PVector(posX, posY)));

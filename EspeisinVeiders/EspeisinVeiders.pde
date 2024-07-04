@@ -35,7 +35,7 @@ public Timmer tiempo;
 // Tiempo de cooldown entre disparos 
 private int cooldownTimeBomba = 3000; //  3 segundo de cooldown
 private int cooldownTimeBala = 400; // 1 segundo de cooldown
-private int cooldownTimeBalaEnemigo = 350; // 1 segundo de cooldown
+private int cooldownTimeBalaEnemigo = 260; // 1 segundo de cooldown
 private SpawnerBossAttack spawnerBossAttack;
 private CollisionDetector collision;
 /*-------*/
@@ -46,10 +46,10 @@ PFont font;
 
 public void setup() {
 //fullScreen ();
-size(1000,900);
+size(1200,800);
 font = loadFont("DePixel-Bold-20.vlw");
 textFont(font);
-boss = new Boss (new PVector (width/2,-150));
+boss = new Boss (new PVector (width/2,-160));
 spawnerBossAttack= new SpawnerBossAttack(13);
 spawnerBossAttack.spawnAttacks();
  spawnerBalaEnemigo = new SpawnerBalasEnemigo(1000);
@@ -166,13 +166,10 @@ public void draw() {
           ganandoAudio.play(); //Reproducimos la musica de jugandoAudio
         }
         
-        if ( boss.getPosicion().x >= height) {
-          gestorJuego.setNivelJuego(MaquinaEstados.PANTALLA_GANANDO);
-          
-        }
+      
         
          // Verificar si la posición en Y del Boss es >= 800
-        if (boss.getPosicion().y >= 680 || miTanque.getCantVida()== 0) {
+        if (boss.getPosicion().y >= 600 || miTanque.getCantVida()== 0) {
             gestorJuego.setNivelJuego(MaquinaEstados.PANTALLA_PERDIENDO);
             bossAudio.pause();//Pausamos la musica bossAudio
             perdiendoAudio.play(); //Reproducimos la musica de perdiendoAudio
@@ -181,7 +178,7 @@ public void draw() {
 
         // Verificar si la posición en Y de cualquier Alien es >= 800
         for (Alien alien : spawnerAlien.getAliens()) {
-            if (alien.getPosicion().y >= 710) {
+            if (alien.getPosicion().y >= 640) {
                  gestorJuego.setNivelJuego(MaquinaEstados.PANTALLA_PERDIENDO);
                  jugandoAudio.pause();//Pausamos la musica jugandoAudio
                  perdiendoAudio.play(); //Reproducimos la musica de perdiendoAudio

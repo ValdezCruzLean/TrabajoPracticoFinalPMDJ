@@ -52,7 +52,7 @@ class Alien extends GameObject implements IVisualizable {
     public void move() {
         this.posicion.y += this.velocidad.y * Time.getDeltaTime(frameRate);
         /*Se actualiza la posicion en x para crear un movimiento oscilante*/
-         this.posicion.x = this.initialX +75 * (cos(timer*0.7)); 
+         this.posicion.x = this.initialX +110 * (cos(timer*0.7)); 
       
         /*Si el tiempo transcurrido desde el ultimo cambio de frame es mayor que el intervalo de frame ,
           se actualiza el frame actual al siguiente frame de manera circular*/

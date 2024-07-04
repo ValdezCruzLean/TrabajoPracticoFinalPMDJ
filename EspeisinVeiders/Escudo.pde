@@ -13,7 +13,7 @@ class Escudo extends GameObject implements IVisualizable {
     public Escudo(PVector posicion) {
         this.posicion = posicion;
         this.size = 100; 
-        this.durabilidad = 150; 
+        this.durabilidad = 180; 
         this.imagen = loadImage("./escudo.png");
 
     }
