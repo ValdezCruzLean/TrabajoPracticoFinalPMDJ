@@ -18,7 +18,7 @@ class SpawnerAlien {
 /*Constructor por defecto*/
     public SpawnerAlien() {
         this.filas =5;
-        this.columnas = 8 ;
+        this.columnas = 8   ;
         this.anchoAlien = 60;
         this.altoAlien = 30;
         this.espacioX = 10;
