@@ -174,8 +174,8 @@ Esto asegura que la bala se añade al primer espacio disponible en el arreglo.*/
       if (keyCode == RIGHT) {
         this.posicion.x+=this.velocidad.x*Time.getDeltaTime (frameRate);
       }
-      if (posicion.x > 800) {
-        this.posicion.x = 800;
+      if (posicion.x > width -250) {
+        this.posicion.x = width -250;
       }
       if (posicion.x < 150) {
         this.posicion.x = 150;
